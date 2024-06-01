@@ -1,0 +1,17 @@
+.handlers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .price svg {
+    width: 36px;
+    height: 36px;
+  }

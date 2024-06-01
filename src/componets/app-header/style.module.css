@@ -1,0 +1,37 @@
+header.appHeader {
+  background-color: #1C1C21;
+  height: 88px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+header.appHeader .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header.appHeader .logoWrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: inline-block;
+  width: 290px;
+  margin: auto;
+}
+
+header.appHeader ul.navigationBar {
+  display: flex;
+  gap: 8px;
+}
+
+header.appHeader ul.navigationBar li.navigationLink {
+  display: inline-block;
+  border-radius: 40px;
+}
+
+header.appHeader ul.navigationBar li.navigationLink .navigationText {
+  line-height: 24px;
+  vertical-align: top;
+}

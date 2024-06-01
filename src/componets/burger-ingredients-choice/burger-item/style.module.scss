@@ -1,0 +1,13 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dragIcon_hidden {
+  visibility: hidden;
+}
+
+.dragIcon_visible {
+  visibility: visible;
+}
