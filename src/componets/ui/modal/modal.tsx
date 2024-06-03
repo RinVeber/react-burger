@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import React, { ReactNode, useEffect } from "react";
 import style from "./style.module.scss";
-import PropTypes from "prop-types";
 import ModalHeader from "./modal-header/modal-header";
+import { ModalOverlay } from "./modal-overlay/modal-overlay";
 
 interface PropsModal {
   children?: ReactNode;
@@ -14,7 +14,7 @@ const modalRoot = document.getElementById("modalRoot") as
   | Element
   | DocumentFragment;
 
-function WrapperModal({ children, header, onClose }: PropsModal) {
+function Modal({ children, header, onClose }: PropsModal) {
   useEffect(() => {
     const keyClose = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
@@ -27,9 +27,6 @@ function WrapperModal({ children, header, onClose }: PropsModal) {
     };
   }, [onClose]);
 
-  const ModalOverlay = ({ close }: { close: () => void }): JSX.Element => {
-    return <div className={style.overlay} onClick={close}></div>;
-  };
 
   return ReactDOM.createPortal(
     <React.Fragment>
@@ -43,10 +40,6 @@ function WrapperModal({ children, header, onClose }: PropsModal) {
   );
 }
 
-WrapperModal.propTypes = {
-  children: PropTypes.element.isRequired,
-  header: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-};
 
-export default WrapperModal;
+
+export default Modal;

@@ -2,7 +2,7 @@ import React from "react";
 import AppHeader from "../app-header/app-header";
 import { Outlet } from "react-router-dom";
 import { data, IDataItem } from "../../utils/data";
-import GetIngredientsApi from "../../utils/helper-function/checkResponse";
+import getIngredientsApi from "../../utils/helper-function/checkResponse";
 
 export function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -12,7 +12,7 @@ export function App() {
 
   React.useEffect(() => {
     setIsLoading(true);
-    GetIngredientsApi()
+    getIngredientsApi()
       .then((res) => setIngredientsData(res.data))
       .catch((err) => {
         console.log(err);

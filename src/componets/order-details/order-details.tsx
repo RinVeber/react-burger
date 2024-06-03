@@ -2,7 +2,7 @@ import style from "./style.module.scss";
 import doneIcon from "../../images/done.gif";
 import React from "react";
 
-export default function ModalDetails() {
+export default function OrderDetails() {
   const mockOrderData = "034536";
 
   return (

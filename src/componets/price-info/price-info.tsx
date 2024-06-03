@@ -4,23 +4,18 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./style.module.scss";
-import { IDataItem, IngredientPropType } from "../../utils/data";
-import WrapperModal from "../ui/modal/modal";
-import ModalDetails from "../modal-details/modal-details";
+import { IngredientPropType } from "../../utils/data";
+import Modal from "../ui/modal/modal";
+import OrderDetails from "../order-details/order-details";
 import React from "react";
+import { useModal } from "../../utils/hooks/useModal";
 
-type NonNullableDataItem = NonNullable<IDataItem>;
 
-interface PriceInfoProps {
-  data: NonNullableDataItem[];
-}
-
-export default function PriceInfo({ data }: PriceInfoProps) {
+export default function PriceInfo({ data }: any) {
   const sum =
     data && data.reduce((prev: any, next: any) => prev + next.price, 0);
-  const [isOrderVisible, setOrderVisibility] = React.useState(false);
 
-  const openModal = () => setOrderVisibility(!isOrderVisible);
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <React.Fragment>
@@ -39,10 +34,10 @@ export default function PriceInfo({ data }: PriceInfoProps) {
         </Button>
       </div>
 
-      {isOrderVisible && (
-        <WrapperModal onClose={openModal}>
-          <ModalDetails />
-        </WrapperModal>
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <OrderDetails />
+        </Modal>
       )}
     </React.Fragment>
   );

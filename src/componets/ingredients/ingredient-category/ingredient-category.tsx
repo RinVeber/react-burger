@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 import style from "./style.module.scss";
-import PropTypes from "prop-types";
 
 interface Props {
-  title: string,
+  title: string;
   children: ReactNode;
 }
 
@@ -15,8 +14,3 @@ export default function IngredientCategory({ title, children }: Props) {
     </div>
   );
 }
-
-IngredientCategory.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};

@@ -1,6 +1,6 @@
 import { BASE_URL } from "../data";
 
-async function GetIngredientsApi() {
+async function getIngredientsApi() {
   function checkResponse(res: Response) {
     return res.ok
       ? res.json()
@@ -10,4 +10,4 @@ async function GetIngredientsApi() {
   return checkResponse(res);
 }
 
-export default GetIngredientsApi;
+export default getIngredientsApi;

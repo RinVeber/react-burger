@@ -8,7 +8,7 @@ interface Props {
   data: IDataItem[];
 }
 
-export default function ModalIngredient({ id, data }: Props) {
+export default function IngredientDetails({ id, data }: Props) {
   const item = data && data.find((el) => el._id === id);
   return (
     <React.Fragment>
@@ -54,7 +54,3 @@ export default function ModalIngredient({ id, data }: Props) {
   );
 }
 
-ModalIngredient.propTypes = {
-  id: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(IngredientPropType).isRequired,
-};

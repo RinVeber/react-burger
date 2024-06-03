@@ -5,14 +5,13 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-interface Props {
-name: string,
-price: number,
-image: string,
-openId: string,
-onOpen: () => void
-}
-export default function IngredientItem({ name, price, image, onOpen, openId }: Props) {
+export default function IngredientItem({
+  name,
+  price,
+  image,
+  onOpen,
+  openId,
+}: any) {
   return (
     <li className={style.item} onClick={onOpen} id={openId}>
       <Counter count={1} size="default" />

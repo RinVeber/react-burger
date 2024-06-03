@@ -11,8 +11,8 @@ interface Props {
 export default function BurgerConstructor({data}: Props) {
   return (
     <div className={`pt-25 ${style.constructor}`}>
-      <BurgerIngredientsChoice data={data as IDataItem[]} />
-      <PriceInfo data={data as IDataItem[]}/>
+      <BurgerIngredientsChoice data={mockChoices as IDataItem[]} />
+      <PriceInfo data={mockChoices as IDataItem[]}/>
     </div>
   );
 }

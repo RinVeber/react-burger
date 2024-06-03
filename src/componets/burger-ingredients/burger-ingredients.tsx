@@ -3,8 +3,9 @@ import { IDataItem } from "../../utils/data";
 import Ingredients from "../ingredients/ingredients";
 import style from "./style.module.scss";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import WrapperModal from "../ui/modal/modal";
-import ModalIngredient from "../modal-ingredient/modal-ingredient";
+import Modal from "../ui/modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import { useModal } from "../../utils/hooks/useModal";
 
 enum TabStatus {
   sauces = "sauces",
@@ -23,41 +24,43 @@ export default function BurgerIngredients({ data }: Props) {
   const openIngredientPop = (e: any) =>
     setCurrentIngredient(e.currentTarget.id);
   const closeIngredientPop = (e: any) => setCurrentIngredient(null);
+
   return (
     <React.Fragment>
-    <div className={style.ingredientsList}>
-      <h2 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h2>
-      <div className={style.tabs}>
-   
-        <Tab
-          value={TabStatus.buns}
-          active={current === TabStatus.buns}
-          onClick={setCurrent}
-        >
-          Булки
-        </Tab>
-        <Tab
-          value={TabStatus.sauces}
-          active={current === TabStatus.sauces}
-          onClick={setCurrent}
-        >
-          Соусы
-        </Tab>
-        <Tab
-          value={TabStatus.mains}
-          active={current === TabStatus.mains}
-          onClick={setCurrent}
-        >
-          Начинки
-        </Tab>
-      </div>
+      <div className={style.ingredientsList}>
+        <h2 className="text text_type_main-large mt-10 mb-5">
+          Соберите бургер
+        </h2>
+        <div className={style.tabs}>
+          <Tab
+            value={TabStatus.buns}
+            active={current === TabStatus.buns}
+            onClick={setCurrent}
+          >
+            Булки
+          </Tab>
+          <Tab
+            value={TabStatus.sauces}
+            active={current === TabStatus.sauces}
+            onClick={setCurrent}
+          >
+            Соусы
+          </Tab>
+          <Tab
+            value={TabStatus.mains}
+            active={current === TabStatus.mains}
+            onClick={setCurrent}
+          >
+            Начинки
+          </Tab>
+        </div>
 
-      <Ingredients data={data} onOpen={openIngredientPop} />
-    </div>
+        <Ingredients data={data} onOpen={openIngredientPop} />
+      </div>
       {currentIngredient && (
-        <WrapperModal header="Детали ингредиента" onClose={closeIngredientPop}>
-          <ModalIngredient id={currentIngredient} data={data} />
-        </WrapperModal>
+        <Modal header="Детали ингредиента" onClose={closeIngredientPop}>
+          <IngredientDetails id={currentIngredient} data={data} />
+        </Modal>
       )}
     </React.Fragment>
   );

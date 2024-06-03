@@ -54,7 +54,3 @@ function BurgerIngredientsChoice({ data }: Props) {
 }
 
 export default React.memo(BurgerIngredientsChoice)
-
-BurgerIngredientsChoice.propTypes = {
-  data: PropTypes.arrayOf(IngredientPropType).isRequired,
-};

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import style from "./style.module.scss";
-import PropTypes from "prop-types";
 
 interface Props {
   close: () => void;
@@ -19,7 +18,3 @@ export default function ModalHeader({ close, children }: Props) {
   );
 }
 
-ModalHeader.propTypes = {
-  close: PropTypes.func.isRequired,
-  children: PropTypes.string,
-};

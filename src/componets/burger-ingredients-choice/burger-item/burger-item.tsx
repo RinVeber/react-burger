@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./style.module.scss";
-import { IDataItem, IngredientPropType } from "../../../utils/data";
+import { IDataItem } from "../../../utils/data";
 
 interface Props {
   item: IDataItem;
@@ -24,7 +23,7 @@ export default function BurgerItem({ item, position, isVisibility }: Props) {
       </div>
       <ConstructorElement
         type={position}
-        isLocked={position !== "top" && position !== "bottom"}
+        isLocked={position === "top" || position === "bottom"}
         text={
           item.name +
           (position === "top" ? " (верх)" : "") +
@@ -36,9 +35,3 @@ export default function BurgerItem({ item, position, isVisibility }: Props) {
     </li>
   );
 }
-
-BurgerItem.propTypes = {
-  item: IngredientPropType.isRequired,
-  position: PropTypes.string.isRequired,
-  isVisibility: PropTypes.bool.isRequired,
-};
