@@ -5,7 +5,6 @@ import style from "./style.module.scss";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../ui/modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import { useModal } from "../../utils/hooks/useModal";
 
 enum TabStatus {
   sauces = "sauces",

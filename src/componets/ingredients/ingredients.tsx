@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import style from "./style.module.scss";
-
 import { IngredientPropType } from "../../utils/data";
 import IngredientCategory from "./ingredient-category/ingredient-category";
 import { getIngredientCards } from "../../utils/helper-function/getCard";
