@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .title {
+    margin-right: auto;
+    margin-left: 0;
+  }
+  
+  .closeBox {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    cursor: pointer;
+  }

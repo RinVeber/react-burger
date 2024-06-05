@@ -1,0 +1,23 @@
+.primaryList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+  
+  .secondaryList {
+    composes: primaryList;
+    max-height: calc(100vh - 88px - 100px - 160px - 32px - 64px - 40px - 52px);
+    overflow-y: scroll;
+  }
+  
+  .secondaryList::-webkit-scrollbar {
+    width: 8px;
+    background: #2f2f37;
+  }
+  
+  .secondaryList::-webkit-scrollbar-thumb {
+    background: #8585ad;
+  }
