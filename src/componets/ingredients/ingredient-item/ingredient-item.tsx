@@ -1,9 +1,21 @@
 import style from "./style.module.scss";
-import PropTypes from "prop-types";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useAppSelector } from "../../services/store";
+import React from "react";
+import { useDrag } from "react-dnd";
+
+interface Props {
+  name: string;
+  price: number;
+  image: string;
+  onOpen: () => void;
+  openId: string;
+  type: string;
+  index: string;
+}
 
 export default function IngredientItem({
   name,
@@ -11,10 +23,36 @@ export default function IngredientItem({
   image,
   onOpen,
   openId,
-}: any) {
+  type,
+  index,
+}: Props) {
+  const { selectedIngredients } = useAppSelector(
+    (store) => store.burgerConstructor
+  );
+  const count = React.useMemo(() => {
+    return selectedIngredients.reduce(
+      (acc, item) => (item._id === openId ? ++acc : acc),
+      0
+    );
+  }, [openId, selectedIngredients]);
+
+  const [{ isDrag }, drag] = useDrag({
+    type: "ingredient",
+    item: { openId, type },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+
   return (
-    <li className={style.item} onClick={onOpen} id={openId}>
-      <Counter count={1} size="default" />
+    <li
+      ref={drag}
+      className={style.item}
+      onClick={onOpen}
+      id={openId}
+      style={isDrag ? { opacity: 0.5 } : { opacity: 1 }}
+    >
+      <Counter count={count} size="default" />
       <img className={`ml-4 mr-4`} src={image} alt={name} />
       <div className={style.price}>
         <p className="text text_type_digits-default mr-2">{price}</p>
@@ -25,11 +63,3 @@ export default function IngredientItem({
     </li>
   );
 }
-
-IngredientItem.propTypes = {
-  openId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  onOpen: PropTypes.func.isRequired,
-};

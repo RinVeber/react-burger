@@ -11,7 +11,6 @@ export const router = createBrowserRouter([
       {
         path: paths.main,
         element: <MainLayout />,
-        // loader: ingredientLoader
       },
     ],
   },

@@ -1,28 +1,60 @@
 import React from "react";
-import { IDataItem } from "../../utils/data";
 import Ingredients from "../ingredients/ingredients";
 import style from "./style.module.scss";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../ui/modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import {
+  removeCurrentIngredientAction,
+  toggleIngredientsTabAction,
+} from "../services/dataSlice";
+import { useAppDispatch, useAppSelector } from "../services/store";
 
-enum TabStatus {
-  sauces = "sauces",
-  mains = "mains",
-  buns = "buns",
+export enum TabStatus {
+  sauces = "sauce",
+  mains = "main",
+  buns = "bun",
 }
 
-export interface Props {
-  data: IDataItem[];
-}
+export default function BurgerIngredients() {
+  const dispatch = useAppDispatch();
+  const { selectedIngredient, ingredientsCurrentTab } = useAppSelector(
+    (store) => store.data
+  );
 
-export default function BurgerIngredients({ data }: Props) {
-  const [current, setCurrent] = React.useState<string>(TabStatus.buns);
-  const [currentIngredient, setCurrentIngredient] = React.useState(null);
+  const bunsRef = React.useRef<HTMLDivElement>(null);
+  const saucesRef = React.useRef<HTMLDivElement>(null);
+  const mainsRef = React.useRef<HTMLDivElement>(null);
 
-  const openIngredientPop = (e: any) =>
-    setCurrentIngredient(e.currentTarget.id);
-  const closeIngredientPop = (e: any) => setCurrentIngredient(null);
+  const scrollTo = (scrollRef: React.RefObject<HTMLDivElement>): void => {
+    return scrollRef.current?.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
+    });
+  };
+
+  const handleClick = (element: string) => {
+    switch (element) {
+      case TabStatus.buns:
+        dispatch(toggleIngredientsTabAction(TabStatus.buns));
+        scrollTo(bunsRef);
+        break;
+      case TabStatus.sauces:
+        dispatch(toggleIngredientsTabAction(TabStatus.sauces));
+        scrollTo(saucesRef);
+        break;
+      case TabStatus.mains:
+        dispatch(toggleIngredientsTabAction(TabStatus.mains));
+        scrollTo(mainsRef);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const closeIngredientPop = () => {
+    dispatch(removeCurrentIngredientAction());
+  };
 
   return (
     <React.Fragment>
@@ -33,32 +65,36 @@ export default function BurgerIngredients({ data }: Props) {
         <div className={style.tabs}>
           <Tab
             value={TabStatus.buns}
-            active={current === TabStatus.buns}
-            onClick={setCurrent}
+            active={ingredientsCurrentTab === TabStatus.buns}
+            onClick={(e) => handleClick(e)}
           >
             Булки
           </Tab>
           <Tab
             value={TabStatus.sauces}
-            active={current === TabStatus.sauces}
-            onClick={setCurrent}
+            active={ingredientsCurrentTab === TabStatus.sauces}
+            onClick={handleClick}
           >
             Соусы
           </Tab>
           <Tab
             value={TabStatus.mains}
-            active={current === TabStatus.mains}
-            onClick={setCurrent}
+            active={ingredientsCurrentTab === TabStatus.mains}
+            onClick={handleClick}
           >
             Начинки
           </Tab>
         </div>
 
-        <Ingredients data={data} onOpen={openIngredientPop} />
+        <Ingredients
+          bunsRef={bunsRef}
+          saucesRef={saucesRef}
+          mainsRef={mainsRef}
+        />
       </div>
-      {currentIngredient && (
+      {selectedIngredient && (
         <Modal header="Детали ингредиента" onClose={closeIngredientPop}>
-          <IngredientDetails id={currentIngredient} data={data} />
+          <IngredientDetails />
         </Modal>
       )}
     </React.Fragment>

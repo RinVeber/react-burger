@@ -1,28 +1,28 @@
 import style from "./style.module.scss";
-import PropTypes from "prop-types";
-import { IDataItem, IngredientPropType } from "../../utils/data";
 import React from "react";
+import { useAppSelector } from "../services/store";
 
-interface Props {
-  id: number | string;
-  data: IDataItem[];
-}
-
-export default function IngredientDetails({ id, data }: Props) {
-  const item = data && data.find((el) => el._id === id);
+export default function IngredientDetails() {
+  const { selectedIngredient } = useAppSelector((store) => store.data);
   return (
     <React.Fragment>
       <div className={style.figure}>
-        <img className={style.image} src={item?.image} alt={item?.name} />
+        <img
+          className={style.image}
+          src={selectedIngredient?.image}
+          alt={selectedIngredient?.name}
+        />
       </div>
-      <p className="text text_type_main-medium mt-4 mb-8">{item?.name}</p>
+      <p className="text text_type_main-medium mt-4 mb-8">
+        {selectedIngredient?.name}
+      </p>
       <ul className={`${style.list} mb-5`}>
         <li className={style.item}>
           <p className="text text_type_main-default text_color_inactive">
             Калории,ккал
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {item?.calories}
+            {selectedIngredient?.calories}
           </p>
         </li>
         <li className={style.item}>
@@ -30,7 +30,7 @@ export default function IngredientDetails({ id, data }: Props) {
             Белки, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {item?.proteins}
+            {selectedIngredient?.proteins}
           </p>
         </li>
         <li className={style.item}>
@@ -38,7 +38,7 @@ export default function IngredientDetails({ id, data }: Props) {
             Жиры, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {item?.fat}
+            {selectedIngredient?.fat}
           </p>
         </li>
         <li className={style.item}>
@@ -46,11 +46,10 @@ export default function IngredientDetails({ id, data }: Props) {
             Углеводы, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {item?.carbohydrates}
+            {selectedIngredient?.carbohydrates}
           </p>
         </li>
       </ul>
     </React.Fragment>
   );
 }
-
