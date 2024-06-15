@@ -26,15 +26,19 @@ export default function IngredientItem({
   type,
   index,
 }: Props) {
-  const { selectedIngredients } = useAppSelector(
+  const { selectedIngredients, selectedBun } = useAppSelector(
     (store) => store.burgerConstructor
   );
   const count = React.useMemo(() => {
-    return selectedIngredients.reduce(
-      (acc, item) => (item._id === openId ? ++acc : acc),
-      0
-    );
-  }, [openId, selectedIngredients]);
+    if (type === "bun" && selectedBun) {
+      return selectedBun._id === openId ? 1 : 0;
+    } else {
+      return selectedIngredients.reduce(
+        (acc, item) => (item._id === openId ? ++acc : acc),
+        0
+      );
+    }
+  }, [openId, selectedIngredients, selectedBun]);
 
   const [{ isDrag }, drag] = useDrag({
     type: "ingredient",

@@ -5,8 +5,6 @@ import { useAppSelector } from "../services/store";
 
 export default function OrderDetails() {
   const { orderDetails, orderNumber } = useAppSelector((store) => store.burgerConstructor);
-
-  console.log(orderDetails);
   return (
     <React.Fragment>
       <p className={`${style.number} text text_type_digits-large mt-4`}>

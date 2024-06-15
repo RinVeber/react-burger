@@ -1,15 +1,15 @@
 import {
   ActionReducerMapBuilder,
-  createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { BASE_URL, IDataItem } from "../../utils/data";
-import { TabStatus } from "../burger-ingredients/burger-ingredients";
+import {  IDataItem } from "../../../utils/data";
+import { TabStatus } from "../../burger-ingredients/burger-ingredients";
+import { getAllIngredientsAction } from "../actions/actions";
 
 interface State {
   ingredients: IDataItem[];
   success: boolean;
-  errorMessage: string | null;
+  errorMessage: unknown;
   ingredientsCurrentTab: TabStatus;
   status: "init" | "loading" | "success" | "error";
   selectedIngredient: IDataItem | null;
@@ -23,24 +23,6 @@ const dataState: State = {
   selectedIngredient: null,
   status: "init",
 };
-
-export const getAllIngredientsAction = createAsyncThunk(
-  "data/getAllIngredientsAction",
-  async (_, { dispatch }) => {
-    try {
-      const response = await fetch(`${BASE_URL}/ingredients/`, {
-        method: "GET",
-      });
-      if (response.ok) {
-        return response.json();
-      } else {
-        dispatch(loadDataFailAction(response.json()));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-);
 
 export const dataSlice = createSlice({
   name: "data",
@@ -73,6 +55,7 @@ export const dataSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getAllIngredientsAction.rejected, (state, action) => {
+        state.errorMessage = action.payload;
         state.success = false;
         state.status = "error";
       });

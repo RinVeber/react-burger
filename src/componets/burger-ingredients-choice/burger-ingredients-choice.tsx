@@ -7,7 +7,8 @@ import { DefaultBun, findElement, getRandom } from "./helper";
 import {
   addIngredientAction,
   sortIngredientsAction,
-} from "../services/constructorSlice";
+} from "../services/slices/constructorSlice";
+import { IDataItem } from "../../utils/data";
 
 function BurgerIngredientsChoice() {
   const dispatch = useAppDispatch();
@@ -24,7 +25,10 @@ function BurgerIngredientsChoice() {
       isHover: monitor.isOver(),
     }),
     drop(item) {
-      const target = { ...findElement(item, ingredients), index: getRandom() };
+      const target = {
+        ...findElement(item, ingredients),
+        index: getRandom(),
+      } as IDataItem;
       dispatch(addIngredientAction(target));
     },
   });
@@ -48,15 +52,14 @@ function BurgerIngredientsChoice() {
         item={selectedBun ? selectedBun : DefaultBun}
         position="top"
         isVisibility={false}
-        key={selectedBun ? selectedBun._id : getRandom()}
       />
       <ul className={style.secondaryList}>
         {selectedIngredients.length > 0 &&
           selectedIngredients.map((item, index) => (
             <BurgerItem
+              key={item.uniqueId}
               item={item}
               isVisibility={true}
-              key={item._id + index}
               index={index}
               moveListItem={moveListItem}
             />
@@ -66,7 +69,6 @@ function BurgerIngredientsChoice() {
         item={selectedBun ? selectedBun : DefaultBun}
         position="bottom"
         isVisibility={false}
-        key={selectedBun && selectedBun._id + getRandom()}
       />
     </ul>
   );

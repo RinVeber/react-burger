@@ -1,17 +1,17 @@
 import React from "react";
 import AppHeader from "../app-header/app-header";
-import { Outlet } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../services/store";
-import { getAllIngredientsAction } from "../services/dataSlice";
+import { Outlet, useLoaderData } from "react-router-dom";
+import store, { useAppSelector } from "../services/store";
+import { getAllIngredientsAction } from "../services/actions/actions";
+
+export const loaderIngredientsFull = async () => {
+  const { payload } = await store.dispatch(getAllIngredientsAction());
+
+  return payload;
+};
 
 export function App() {
-  const { ingredients, status } = useAppSelector((store) => store.data);
-
-  const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(getAllIngredientsAction());
-  }, []);
+  const { status } = useAppSelector((store) => store.data);
 
   return (
     <React.Fragment>

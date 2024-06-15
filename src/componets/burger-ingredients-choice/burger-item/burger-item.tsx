@@ -5,7 +5,7 @@ import {
 import style from "./style.module.scss";
 import { IDataItem } from "../../../utils/data";
 import { useAppDispatch } from "../../services/store";
-import { removeIngredientAction } from "../../services/constructorSlice";
+import { removeIngredientAction } from "../../services/slices/constructorSlice";
 import { useDrag, useDrop } from "react-dnd";
 import React from "react";
 import { DefaultBun } from "../helper";

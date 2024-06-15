@@ -10,8 +10,8 @@ import { useModal } from "../../utils/hooks/useModal";
 import { useAppDispatch, useAppSelector } from "../services/store";
 import {
   clearConstructorAction,
-  sendOrderAction,
-} from "../services/constructorSlice";
+} from "../services/slices/constructorSlice";
+import { sendOrderAction } from "../services/actions/actions";
 
 export default function PriceInfo() {
   const dispatch = useAppDispatch();

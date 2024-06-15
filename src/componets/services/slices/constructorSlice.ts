@@ -1,9 +1,11 @@
 import {
   ActionReducerMapBuilder,
-  createAsyncThunk,
   createSlice,
+  nanoid,
+  PayloadAction,
 } from "@reduxjs/toolkit";
-import { BASE_URL, IDataItem } from "../../utils/data";
+import { IDataItem } from "../../../utils/data";
+import { sendOrderAction } from "../actions/actions";
 
 interface Order {
   name: string;
@@ -14,12 +16,12 @@ interface Order {
 }
 
 interface State {
-  selectedBun: any;
+  selectedBun: IDataItem | null;
   selectedIngredients: IDataItem[];
   orderNumber: string | number | null;
   orderDetails: Order | null;
   success: boolean;
-  errorMessage: string | null;
+  errorMessage: unknown;
   status: "init" | "loading" | "success" | "error";
 }
 
@@ -33,37 +35,29 @@ const constructorState: State = {
   status: "init",
 };
 
-export const sendOrderAction = createAsyncThunk(
-  "constructor/sendOrderAction",
-  async (data: string[], { dispatch }) => {
-    try {
-      const response = await fetch(`${BASE_URL}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ingredients: data }),
-      });
-      return response.json();
-    } catch (e) {
-      console.log(e);
-    }
-  }
-);
-
 export const constructorSlice = createSlice({
   name: "constructor",
   initialState: constructorState,
   reducers: {
-    addIngredientAction: (state, action) => {
-      if (action.payload.type === "bun") {
-        state.selectedBun = action.payload;
-      } else {
-        state.selectedIngredients = [
-          action.payload,
-          ...state.selectedIngredients,
-        ];
-      }
+    loadOrderFailAction: (state, action) => {
+      state.errorMessage = action.payload;
+      state.success = action.payload.success;
+      state.orderDetails = null;
+    },
+    addIngredientAction: {
+      reducer: (state, action: PayloadAction<IDataItem>) => {
+        if (action.payload.type === "bun") {
+          state.selectedBun = action.payload;
+        } else {
+          state.selectedIngredients = [
+            action.payload,
+            ...state.selectedIngredients
+          ];
+        }
+      },
+      prepare: (ingredient: IDataItem) => {
+        return { payload: { ...ingredient, uniqueId: nanoid() } };
+      },
     },
 
     removeIngredientAction: (state, action) => {
@@ -103,6 +97,7 @@ export const constructorSlice = createSlice({
         state.status = "loading";
       })
       .addCase(sendOrderAction.rejected, (state, action) => {
+        state.errorMessage = action.payload;
         state.success = false;
         state.status = "error";
       });
@@ -114,5 +109,6 @@ export const {
   removeIngredientAction,
   clearConstructorAction,
   sortIngredientsAction,
+  loadOrderFailAction,
 } = constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;
