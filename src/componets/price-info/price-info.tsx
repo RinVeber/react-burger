@@ -1,21 +1,55 @@
-import PropTypes from "prop-types";
 import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./style.module.scss";
-import { IngredientPropType } from "../../utils/data";
 import Modal from "../ui/modal/modal";
 import OrderDetails from "../order-details/order-details";
 import React from "react";
 import { useModal } from "../../utils/hooks/useModal";
+import { useAppDispatch, useAppSelector } from "../services/store";
+import {
+  clearConstructorAction,
+} from "../services/slices/constructorSlice";
+import { sendOrderAction } from "../services/actions/actions";
 
+export default function PriceInfo() {
+  const dispatch = useAppDispatch();
+  const { selectedBun, selectedIngredients } = useAppSelector(
+    (store) => store.burgerConstructor
+  );
 
-export default function PriceInfo({ data }: any) {
-  const sum =
-    data && data.reduce((prev: any, next: any) => prev + next.price, 0);
+  const fullOrder = React.useMemo(() => {
+    const fullArray = [...selectedIngredients];
+    if (selectedBun) {
+      fullArray.unshift(selectedBun);
+    }
+    return fullArray;
+  }, [selectedBun, selectedIngredients]);
 
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const orderClick = () => {
+    const dataIds = fullOrder.map((item) => item._id);
+    dispatch(sendOrderAction(dataIds));
+    openModal()
+  };
+
+  const sum = React.useMemo(() => {
+    return fullOrder.reduce(
+      (acc, currentItem) =>
+        currentItem.type === "bun"
+          ? acc + currentItem.price * 2
+          : acc + currentItem.price,
+      0
+    );
+  }, [fullOrder]);
+
+  const { isModalOpen, closeModal, openModal } = useModal();
+
+  const removeOrder = () => {
+    dispatch(clearConstructorAction());
+    closeModal();
+  };
+
 
   return (
     <React.Fragment>
@@ -28,21 +62,18 @@ export default function PriceInfo({ data }: any) {
           type="primary"
           size="large"
           htmlType="button"
-          onClick={openModal}
+          onClick={orderClick}
+          disabled={selectedIngredients.length < 3}
         >
           Оформить заказ
         </Button>
       </div>
 
       {isModalOpen && (
-        <Modal onClose={closeModal}>
+        <Modal onClose={removeOrder}>
           <OrderDetails />
         </Modal>
       )}
     </React.Fragment>
   );
 }
-
-PriceInfo.propTypes = {
-  data: PropTypes.arrayOf(IngredientPropType.isRequired),
-};

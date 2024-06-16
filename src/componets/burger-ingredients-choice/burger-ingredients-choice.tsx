@@ -1,56 +1,77 @@
-import PropTypes from "prop-types";
 import style from "./style.module.scss";
 import BurgerItem from "./burger-item/burger-item";
-import { IDataItem, IngredientPropType } from "../../utils/data";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../services/store";
+import { DropTargetMonitor, useDrop } from "react-dnd";
+import { DefaultBun, findElement, getRandom } from "./helper";
+import {
+  addIngredientAction,
+  sortIngredientsAction,
+} from "../services/slices/constructorSlice";
+import { IDataItem } from "../../utils/data";
 
-interface Props {
-  data: IDataItem[]
-}
+function BurgerIngredientsChoice() {
+  const dispatch = useAppDispatch();
+  const { ingredients } = useAppSelector((store) => store.data);
+  const { selectedIngredients, selectedBun } = useAppSelector(
+    (store) => store.burgerConstructor
+  );
 
-function BurgerIngredientsChoice({ data }: Props) {
-  let first;
-  let last;
-  const components: JSX.Element[] = [];
-  data.forEach((element: IDataItem, index: number, arr: any) => {
-    switch (index) {
-      case 0:
-        first = (
-          <BurgerItem
-            item={element}
-            position="top"
-            isVisibility={false}
-            key={element._id + index}
-          />
-        );
-        break;
-      case arr.length - 1:
-        last = (
-          <BurgerItem
-            item={element}
-            position="bottom"
-            isVisibility={false}
-            key={element._id + index}
-          />
-        );
-        break;
-      default:
-        components.push(
-          <BurgerItem
-            item={element}
-            isVisibility={true}
-            key={element._id + index}
-          />
-        );
-    }
+  const [_, drop] = useDrop({
+    accept: "ingredient",
+    collect: (
+      monitor: DropTargetMonitor<{ openId: string; type: string }, unknown>
+    ) => ({
+      isHover: monitor.isOver(),
+    }),
+    drop(item) {
+      const target = {
+        ...findElement(item, ingredients),
+        index: getRandom(),
+      } as IDataItem;
+      dispatch(addIngredientAction(target));
+    },
   });
+
+  const moveListItem = React.useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      dispatch(
+        sortIngredientsAction({
+          componentsArray: [...selectedIngredients],
+          dragIndex: dragIndex,
+          hoverIndex: hoverIndex,
+        })
+      );
+    },
+    [dispatch, selectedIngredients]
+  );
+
   return (
-    <ul className={style.primaryList}>
-      {first}
-      <ul className={style.secondaryList}>{components}</ul>
-      {last}
+    <ul className={style.primaryList} ref={drop}>
+      <BurgerItem
+        item={selectedBun ? selectedBun : DefaultBun}
+        position="top"
+        isVisibility={false}
+      />
+      <ul className={style.secondaryList}>
+        {selectedIngredients.length > 0 &&
+          selectedIngredients.map((item, index) => (
+            <BurgerItem
+              key={item.uniqueId}
+              item={item}
+              isVisibility={true}
+              index={index}
+              moveListItem={moveListItem}
+            />
+          ))}
+      </ul>
+      <BurgerItem
+        item={selectedBun ? selectedBun : DefaultBun}
+        position="bottom"
+        isVisibility={false}
+      />
     </ul>
   );
 }
 
-export default React.memo(BurgerIngredientsChoice)
+export default BurgerIngredientsChoice;

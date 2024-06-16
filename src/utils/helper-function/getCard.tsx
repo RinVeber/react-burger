@@ -16,6 +16,8 @@ export function getIngredientCards(data: IDataItem[], onOpen: any) {
             image={element.image}
             price={element.price}
             onOpen={onOpen}
+            type={element.type}
+            index={element._id}
           />
         );
         switch (element.type) {

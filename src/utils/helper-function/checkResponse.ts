@@ -1,13 +1,12 @@
 import { BASE_URL } from "../data";
 
-async function getIngredientsApi() {
-  function checkResponse(res: Response) {
-    return res.ok
-      ? res.json()
-      : Promise.reject(`Ошибка загрузки данных с сервера: ${res.status}`);
+export const checkResponse = (res: Response) => {
+  if (res.ok) {
+    return res.json();
   }
-  const res = await fetch(BASE_URL);
-  return checkResponse(res);
-}
+  return Promise.reject(`Ошибка ${res.status}`);
+};
 
-export default getIngredientsApi;
+export function request(url: RequestInfo | URL, options: RequestInit) {
+  return fetch(BASE_URL + url, options).then(checkResponse);
+}

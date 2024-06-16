@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const BASE_URL = "https://norma.nomoreparties.space/api/ingredients";
+export const BASE_URL = "https://norma.nomoreparties.space/api";
 
 export interface IDataItem {
   _id: string;
@@ -15,6 +15,7 @@ export interface IDataItem {
   image_mobile: string;
   image_large: string;
   __v: number;
+  uniqueId?: string;
 }
 
 export interface PropsData {
