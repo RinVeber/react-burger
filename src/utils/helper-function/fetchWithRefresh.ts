@@ -23,7 +23,8 @@ export const fetchWithRefresh = async (
   } catch (err) {
     console.log(err);
     if (err === "Ошибка 401") {
-      return (window.location.href = "/login");
+      return null;
+      // return (window.location.href = "/login");
     }
     if (err === "Ошибка 403") {
       const refreshData = await sendRefreshToken();

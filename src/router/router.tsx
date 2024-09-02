@@ -9,7 +9,11 @@ import { ResetPasswordPage } from "../pages/reset-password/ResetPasswordPage";
 import { ProfilePage } from "../pages/profile/ProfilePage";
 import { UserContent } from "../pages/profile/componets/user-content/UserContent";
 import { OrderHistory } from "../pages/profile/componets/orders-history/OrdersHistory";
-import { ProtectedRouteElement } from "./ProtectedRouteElement";
+import {
+  loaderSendUserInfo,
+  ProtectedRouteElement,
+} from "./ProtectedRouteElement";
+import { IngredientPage } from "../pages/ingredient/IngredientPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,25 +26,31 @@ export const router = createBrowserRouter([
         element: <MainLayout />,
       },
       {
-        path: paths.register,
-        element: <RegisterPage />,
+        path: paths.ingredients,
+   
+        element: <IngredientPage />,
+    
       },
-      {
-        path: paths.login,
-        element: <LoginPage />,
-      },
-      {
-        path: paths.forgotPassword,
-        element: <ForgotPasswordPage />,
-      },
-      {
-        path: paths.resetPassword,
-        element: <ResetPasswordPage />,
-      },
-
       {
         element: <ProtectedRouteElement isAuth />,
+        loader: loaderSendUserInfo,
         children: [
+          {
+            path: paths.register,
+            element: <RegisterPage />,
+          },
+          {
+            path: paths.login,
+            element: <LoginPage />,
+          },
+          {
+            path: paths.forgotPassword,
+            element: <ForgotPasswordPage />,
+          },
+          {
+            path: paths.resetPassword,
+            element: <ResetPasswordPage />,
+          },
           {
             path: paths.profile,
             element: <ProfilePage />,

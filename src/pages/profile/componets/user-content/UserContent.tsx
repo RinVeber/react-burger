@@ -10,7 +10,6 @@ import {
 } from "../../../../services/store";
 import {
   sendChangeUserInfoRequestAction,
-  sendUserInfoRequestAction,
 } from "../../../../services/actions/actions";
 
 export function UserContent() {
@@ -20,6 +19,9 @@ export function UserContent() {
   const [nameValue, setNameValue] = React.useState(userInfo?.name || 'Your name');
   const [emailValue, setEmailValue] = React.useState(userInfo?.email || 'test@mailmail.ru');
   const [passwordValue, setPasswordValue] = React.useState("test123");
+  const nameRef = React.useRef<HTMLInputElement>(null);
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const passRef = React.useRef<HTMLInputElement>(null);
 
   const [nameFieldState, setNameFieldState] = React.useState(true);
   const [emailFieldState, setEmailFieldState] = React.useState(true);
@@ -27,9 +29,6 @@ export function UserContent() {
 
   const [isProfileEditing, setProfileEditing] = React.useState(false);
 
-  const nameRef = React.useRef<HTMLInputElement>(null);
-  const emailRef = React.useRef<HTMLInputElement>(null);
-  const passRef = React.useRef<HTMLInputElement>(null);
 
   const setData = (userInfo: any) => {
     setNameValue(userInfo.name);
@@ -38,8 +37,6 @@ export function UserContent() {
   };
 
   React.useEffect(() => {
-    dispatch(sendUserInfoRequestAction());
-
     if (userInfo) {
       setData(userInfo);
     }
@@ -107,8 +104,8 @@ export function UserContent() {
         onIconClick={onNameEditIconClick}
         ref={nameRef}
         disabled={nameFieldState}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
+        onPointerEnterCapture={false}
+        onPointerLeaveCapture={false}
       />
       <Input
         onChange={(e) => setEmailValue(e.target.value)}
@@ -120,8 +117,8 @@ export function UserContent() {
         onIconClick={onEmailIconClick}
         ref={emailRef}
         disabled={emailFieldState}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
+        onPointerEnterCapture={false}
+        onPointerLeaveCapture={false}
       />
       <Input
         type="password"
@@ -134,8 +131,8 @@ export function UserContent() {
         ref={passRef}
         onIconClick={onPassIconClick}
         disabled={passFieldState}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
+        onPointerEnterCapture={false}
+        onPointerLeaveCapture={false}
       />
       {isProfileEditing && (
         <div className={styles.handlers}>

@@ -5,7 +5,7 @@ import {
   Button,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../services/store";
 import { paths } from "../../router/paths";
 import { useLoginMutation } from "../../services/entities/authApi";
@@ -42,10 +42,10 @@ export function LoginPage() {
       }
     }
   };
+  
 
   React.useEffect(() => {
     if (isLoginSuccess) {
-      debugger;
       navigate(`${paths.main}`, { replace: true });
     }
   }, [isLoginSuccess]);

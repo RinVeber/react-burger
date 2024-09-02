@@ -64,11 +64,14 @@ export const authSlice = createSlice({
       state.refreshToken = refreshToken;
       state.success = success;
       state.isLoginSuccess = true;
+      state.userInfoSuccess = true;
     },
     clearUserAction: (state) => {
       state.userInfo = null;
       state.accessToken = null;
       state.refreshToken = null;
+      state.isLoginSuccess = false;
+      state.userInfoSuccess = false;
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<State>) => {

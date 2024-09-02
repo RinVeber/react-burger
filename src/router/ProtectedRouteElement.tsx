@@ -1,35 +1,35 @@
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ReactNode, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../services/store";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import store, { useAppSelector } from "../services/store";
 import { sendUserInfoRequestAction } from "../services/actions/actions";
+import React from "react";
 
 interface Props {
   isAuth: boolean;
 }
 
+export const loaderSendUserInfo = async () => {
+  return await store.dispatch(sendUserInfoRequestAction());
+};
+
 export function ProtectedRouteElement({ isAuth }: Props) {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => {
-    dispatch(sendUserInfoRequestAction());
-  }, []);
   const { userInfoSuccess } = useAppSelector((store) => store.auth);
 
   if (isAuth === true && userInfoSuccess === false) {
-    return <Navigate to={"/login"} replace />;
+    navigate("/login", { replace: true });
   }
 
-  const protectedPaths = ["/login", "/register"];
+  const protectedPathsForNotAuthUser = ["/login", "/register"];
 
-  console.log("check", protectedPaths.includes(location.pathname));
-
-  if (
-    userInfoSuccess === true &&
-    protectedPaths.includes(location.pathname)
-  ) {
-    navigate("/", { replace: true });
-  }
+  React.useEffect(() => {
+    if (
+      userInfoSuccess &&
+      protectedPathsForNotAuthUser.includes(location.pathname)
+    ) {
+      navigate(-1);
+    }
+  }, [userInfoSuccess, location.pathname]);
 
   return <Outlet />;
 }

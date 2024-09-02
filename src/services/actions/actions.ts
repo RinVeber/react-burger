@@ -39,7 +39,6 @@ export const getAllIngredientsAction = createAsyncThunk(
   }
 );
 
-
 export const sendEmailAction = createAsyncThunk(
   "auth/sendEmailAction",
   async ({ email }: { email: string }, { dispatch }) => {
@@ -121,18 +120,21 @@ export const sendChangeUserInfoRequestAction = createAsyncThunk(
   }
 );
 
-
 export const sendUserInfoRequestAction = createAsyncThunk(
   "auth/sendUserInfoRequestAction",
   async (_, { dispatch }) => {
-    console.log( getCookie("accessToken"))
-    
-    return fetchWithRefresh(`/auth/user`, {
+    console.log(getCookie("accessToken"));
+
+    const response = await fetchWithRefresh(`/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         authorization: getCookie("accessToken"),
       },
     });
+
+    if (response.success) {
+      return response;
+    }
   }
 );
