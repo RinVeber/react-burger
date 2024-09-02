@@ -35,7 +35,7 @@ export function ResetPasswordPage() {
           placeholder={"Введите новый пароль"}
           value={passwordValue}
           name={"password"}
-          //   errorText={"Ошибка. Введите другой пароль"}
+          //   errorText={"Введите другой пароль"}
         />
         <Input
           type={"text"}
@@ -43,7 +43,7 @@ export function ResetPasswordPage() {
           onChange={(e) => setCodeValue(e.target.value)}
           value={codeValue}
           name={"code"}
-          errorText={"Ошибка. код введен неверно"}
+          errorText={"Код введен неверно"}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         />

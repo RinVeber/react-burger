@@ -38,7 +38,9 @@ export default function RegisterPage() {
           onChange={(e) => setNameValue(e.target.value)}
           value={nameValue}
           name={"name"}
-          errorText={"Ошибка. Введите корректное имя пользователя"}
+          errorText={"Введите корректное имя пользователя"}
+          //без этих пропсов ts ругается на компонент Input, 
+          //а с ними ошибки в консоле в браузере. В документации к компоненту этих пропсов нету
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         />
@@ -47,13 +49,13 @@ export default function RegisterPage() {
           value={emailValue}
           name={"email"}
           isIcon={false}
-          // errorText={"Ошибка. проверьте правильность почты"}
+          // errorText={"Проверьте правильность почты"}
         />
         <PasswordInput
           onChange={(e) => setPasswordValue(e.target.value)}
           value={passwordValue}
           name={"password"}
-          // errorText={"Ошибка. Введите другой пароль"}
+          // errorText={"Введите другой пароль"}
         />
         <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
