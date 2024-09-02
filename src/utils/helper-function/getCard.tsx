@@ -8,15 +8,16 @@ export function getIngredientCards(data: IDataItem[], onOpen: any) {
 
   data.forEach((element: IDataItem) => {
     const ingredientCard = (
-        <IngredientItem
-          openId={element._id}
-          name={element.name}
-          image={element.image}
-          price={element.price}
-          onOpen={onOpen}
-          type={element.type}
-          index={element._id}
-        />
+      <IngredientItem
+        key={element._id}
+        openId={element._id}
+        name={element.name}
+        image={element.image}
+        price={element.price}
+        onOpen={onOpen}
+        type={element.type}
+        index={element._id}
+      />
     );
     switch (element.type) {
       case "main": {

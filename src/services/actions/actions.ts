@@ -26,7 +26,7 @@ export const sendOrderAction = createAsyncThunk(
 
 export const getAllIngredientsAction = createAsyncThunk(
   "data/getAllIngredientsAction",
-  async (_, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     const response = await request(`/ingredients`, {
       method: "GET",
     });
@@ -36,12 +36,13 @@ export const getAllIngredientsAction = createAsyncThunk(
     } else {
       dispatch(loadOrderFailAction(loadDataFailAction));
     }
+    return rejectWithValue
   }
 );
 
 export const sendEmailAction = createAsyncThunk(
   "auth/sendEmailAction",
-  async ({ email }: { email: string }, { dispatch }) => {
+  async ({ email }: { email: string }, { dispatch, rejectWithValue }) => {
     const response = await request(`/password-reset`, {
       method: "POST",
       headers: {
@@ -53,10 +54,7 @@ export const sendEmailAction = createAsyncThunk(
     if (response.success) {
       return response;
     }
-
-    // else {
-    //   dispatch(loadOrderFailAction(loadDataFailAction));
-    // }
+    return rejectWithValue;
   }
 );
 
@@ -64,7 +62,7 @@ export const sendResetPassRequestAction = createAsyncThunk(
   "auth/sendResetPassRequestAction",
   async (
     { password, code }: { password: string; code: string },
-    { dispatch }
+    { dispatch, rejectWithValue }
   ) => {
     const response = await request(`/password-reset/reset`, {
       method: "POST",
@@ -77,16 +75,13 @@ export const sendResetPassRequestAction = createAsyncThunk(
     if (response.success) {
       return response;
     }
-
-    // else {
-    //   dispatch(loadOrderFailAction(loadDataFailAction));
-    // }
+    return rejectWithValue;
   }
 );
 
 export const sendLogoutRequestAction = createAsyncThunk(
   "auth/sendLogoutRequestAction",
-  async (_, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     const response = await request(`/auth/logout`, {
       method: "POST",
       headers: {
@@ -99,9 +94,7 @@ export const sendLogoutRequestAction = createAsyncThunk(
       return response;
     }
 
-    // else {
-    //   dispatch(loadOrderFailAction(loadDataFailAction));
-    // }
+    return rejectWithValue;
   }
 );
 
@@ -122,10 +115,8 @@ export const sendChangeUserInfoRequestAction = createAsyncThunk(
 
 export const sendUserInfoRequestAction = createAsyncThunk(
   "auth/sendUserInfoRequestAction",
-  async (_, { dispatch }) => {
-    console.log(getCookie("accessToken"));
-
-    const response = await fetchWithRefresh(`/auth/user`, {
+  async (_, { dispatch, rejectWithValue }) => {
+    const response = await request(`/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -136,5 +127,6 @@ export const sendUserInfoRequestAction = createAsyncThunk(
     if (response.success) {
       return response;
     }
+    return rejectWithValue;
   }
 );

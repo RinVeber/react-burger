@@ -12,7 +12,7 @@ import { paths } from "../../router/paths";
 import { sendResetPassRequestAction } from "../../services/actions/actions";
 
 export function ResetPasswordPage() {
-  const { forgotPassSuccess, resetPassSuccess, resetPassMessage } = useAppSelector((store) => store.auth);
+  const { forgotPassSuccess, resetPassMessage } = useAppSelector((store) => store.auth);
   const [codeValue, setCodeValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const dispatch = useAppDispatch();
@@ -23,8 +23,6 @@ export function ResetPasswordPage() {
       dispatch(sendResetPassRequestAction({password: passwordValue, code: codeValue}));
     }
   };
-
-  console.log(resetPassSuccess)
 
   return !forgotPassSuccess ? (
     <Navigate to={paths.forgotPassword} replace />

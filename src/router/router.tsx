@@ -27,43 +27,52 @@ export const router = createBrowserRouter([
       },
       {
         path: paths.ingredients,
-   
+
         element: <IngredientPage />,
-    
       },
       {
-        element: <ProtectedRouteElement isAuth />,
-        loader: loaderSendUserInfo,
+        path: paths.register,
+        element: (
+          <ProtectedRouteElement isAuth={false} page={<RegisterPage />} />
+        ),
+      },
+      {
+        path: paths.login,
+        element: (
+          <ProtectedRouteElement isAuth={false} page={<LoginPage />} />
+        ),
+      },
+      {
+        path: paths.forgotPassword,
+        element: (
+          <ProtectedRouteElement
+            isAuth={false}
+            page={<ForgotPasswordPage />}
+          />
+        ),
+      },
+      {
+        path: paths.resetPassword,
+        element: (
+          <ProtectedRouteElement
+            isAuth={false}
+            page={<ResetPasswordPage />}
+          />
+        ),
+      },
+      {
+        path: paths.profile,
+        element: (
+          <ProtectedRouteElement isAuth={true} page={<ProfilePage />} />
+        ),
         children: [
           {
-            path: paths.register,
-            element: <RegisterPage />,
-          },
-          {
-            path: paths.login,
-            element: <LoginPage />,
-          },
-          {
-            path: paths.forgotPassword,
-            element: <ForgotPasswordPage />,
-          },
-          {
-            path: paths.resetPassword,
-            element: <ResetPasswordPage />,
-          },
-          {
             path: paths.profile,
-            element: <ProfilePage />,
-            children: [
-              {
-                path: paths.profile,
-                element: <UserContent />,
-              },
-              {
-                path: paths.orderHistory,
-                element: <OrderHistory />,
-              },
-            ],
+            element: <UserContent />,
+          },
+          {
+            path: paths.orderHistory,
+            element: <OrderHistory />,
           },
         ],
       },

@@ -15,8 +15,6 @@ export interface PropsContext {
 export default function MainLayout() {
   const { ingredients, status } = useAppSelector((store) => store.data);
 
-  const data = useAppSelector((store) => store.authApi);
-  console.log('data', data)
 
   return (
     <main className={style.main}>

@@ -18,7 +18,7 @@ export enum TabStatus {
 
 export default function BurgerIngredients() {
   const dispatch = useAppDispatch();
-  const { selectedIngredient, ingredientsCurrentTab } = useAppSelector(
+  const { selectedIngredient, ingredientsCurrentTab, isModal } = useAppSelector(
     (store) => store.data
   );
 
@@ -92,7 +92,7 @@ export default function BurgerIngredients() {
           mainsRef={mainsRef}
         />
       </div>
-      {selectedIngredient && (
+      {selectedIngredient && isModal && (
         <Modal header="Детали ингредиента" onClose={closeIngredientPop}>
           <IngredientDetails />
         </Modal>

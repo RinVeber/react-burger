@@ -15,7 +15,7 @@ import { getCookie } from "../../utils/helper-function/cockie";
 
 interface State {
   userInfoSuccess: boolean | null;
-  changeUserInfoSuccess: boolean | null;
+  changeUserInfoSuccess: boolean ;
   accessToken: string | null;
   refreshToken: string | null;
   password: string | null;
@@ -35,7 +35,7 @@ interface State {
 
 const constructorState: State = {
   userInfoSuccess: null,
-  changeUserInfoSuccess: null,
+  changeUserInfoSuccess: false,
   accessToken: getCookie("accessToken") || null,
   refreshToken: getCookie("refreshToken") || null,
   password: null,

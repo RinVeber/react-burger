@@ -19,7 +19,6 @@ export function ForgotPasswordPage() {
   );
 
   React.useEffect(() => {
-    console.log(forgotPassMessage);
     if (forgotPassMessage && forgotPassSuccess) {
       navigate(`${paths.resetPassword}`, { replace: true });
     }

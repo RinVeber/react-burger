@@ -1,6 +1,6 @@
 import React from "react";
 import AppHeader from "../app-header/app-header";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useLocation } from "react-router-dom";
 import store, { useAppSelector } from "../../services/store";
 import { getAllIngredientsAction } from "../../services/actions/actions";
 

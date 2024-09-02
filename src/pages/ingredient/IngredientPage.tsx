@@ -1,4 +1,4 @@
-import { Params, useParams } from "react-router-dom";
+import { Params, useLocation, useParams } from "react-router-dom";
 import IngredientDetails from "../../componets/ingredient-details/ingredient-details";
 import store, { useAppDispatch, useAppSelector } from "../../services/store";
 import styles from "./style.module.scss";
@@ -19,6 +19,7 @@ export function IngredientPage() {
   const { ingredients, selectedIngredient } = useAppSelector(
     (store) => store.data
   );
+  const location = useLocation();
   const dispatch = useAppDispatch();
 
   const params = useParams();
@@ -26,7 +27,7 @@ export function IngredientPage() {
   const findIngredient = ingredients.find((item) => item._id === params.id);
 
   if (findIngredient) {
-    dispatch(getCurrentIngredientAction(findIngredient));
+    dispatch(getCurrentIngredientAction({selectedIngredient: findIngredient, isModal: false}));
   }
 
   if (!selectedIngredient) {

@@ -8,16 +8,19 @@ import OrderDetails from "../order-details/order-details";
 import React from "react";
 import { useModal } from "../../utils/hooks/useModal";
 import { useAppDispatch, useAppSelector } from "../../services/store";
-import {
-  clearConstructorAction,
-} from "../../services/slices/constructorSlice";
+import { clearConstructorAction } from "../../services/slices/constructorSlice";
 import { sendOrderAction } from "../../services/actions/actions";
+import { useNavigate } from "react-router-dom";
+import { paths } from "../../router/paths";
 
 export default function PriceInfo() {
   const dispatch = useAppDispatch();
   const { selectedBun, selectedIngredients } = useAppSelector(
     (store) => store.burgerConstructor
   );
+
+  const { userInfo } = useAppSelector((store) => store.auth);
+  const navigate = useNavigate();
 
   const fullOrder = React.useMemo(() => {
     const fullArray = [...selectedIngredients];
@@ -28,9 +31,13 @@ export default function PriceInfo() {
   }, [selectedBun, selectedIngredients]);
 
   const orderClick = () => {
-    const dataIds = fullOrder.map((item) => item._id);
-    dispatch(sendOrderAction(dataIds));
-    openModal()
+    if (userInfo) {
+      const dataIds = fullOrder.map((item) => item._id);
+      dispatch(sendOrderAction(dataIds));
+      openModal();
+    } else {
+      navigate(paths.login, { replace: true });
+    }
   };
 
   const sum = React.useMemo(() => {
@@ -49,7 +56,6 @@ export default function PriceInfo() {
     dispatch(clearConstructorAction());
     closeModal();
   };
-
 
   return (
     <React.Fragment>
