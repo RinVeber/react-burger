@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./componets/router/router";
+import { router } from "./router/router";
 import ErrorBoundary from "./utils/error-boundary/error-boundary";
 import { Provider } from "react-redux";
-import store from "./componets/services/store";
+import store from "./services/store";
 
 
 

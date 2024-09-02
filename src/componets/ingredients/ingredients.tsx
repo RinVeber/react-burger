@@ -2,9 +2,9 @@ import style from "./style.module.scss";
 import { IDataItem } from "../../utils/data";
 import IngredientCategory from "./ingredient-category/ingredient-category";
 import { getIngredientCards } from "../../utils/helper-function/getCard";
-import { useAppDispatch, useAppSelector } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { currentRow } from "./ingredient-item/helper";
-import { getCurrentIngredientAction, toggleIngredientsTabAction } from "../services/slices/dataSlice";
+import { getCurrentIngredientAction, toggleIngredientsTabAction } from "../../services/slices/dataSlice";
 import { TabStatus } from "../burger-ingredients/burger-ingredients";
 
 interface Props {

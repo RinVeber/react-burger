@@ -1,6 +1,6 @@
 import style from "./style.module.scss";
 import React from "react";
-import { useAppSelector } from "../services/store";
+import { useAppSelector } from "../../services/store";
 
 export default function IngredientDetails() {
   const { selectedIngredient } = useAppSelector((store) => store.data);

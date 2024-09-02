@@ -1,13 +1,13 @@
 import style from "./style.module.scss";
 import BurgerItem from "./burger-item/burger-item";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { DropTargetMonitor, useDrop } from "react-dnd";
 import { DefaultBun, findElement, getRandom } from "./helper";
 import {
   addIngredientAction,
   sortIngredientsAction,
-} from "../services/slices/constructorSlice";
+} from "../../services/slices/constructorSlice";
 import { IDataItem } from "../../utils/data";
 
 function BurgerIngredientsChoice() {

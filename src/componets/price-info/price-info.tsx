@@ -7,11 +7,11 @@ import Modal from "../ui/modal/modal";
 import OrderDetails from "../order-details/order-details";
 import React from "react";
 import { useModal } from "../../utils/hooks/useModal";
-import { useAppDispatch, useAppSelector } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import {
   clearConstructorAction,
-} from "../services/slices/constructorSlice";
-import { sendOrderAction } from "../services/actions/actions";
+} from "../../services/slices/constructorSlice";
+import { sendOrderAction } from "../../services/actions/actions";
 
 export default function PriceInfo() {
   const dispatch = useAppDispatch();

@@ -7,8 +7,8 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {
   removeCurrentIngredientAction,
   toggleIngredientsTabAction,
-} from "../services/slices/dataSlice";
-import { useAppDispatch, useAppSelector } from "../services/store";
+} from "../../services/slices/dataSlice";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 
 export enum TabStatus {
   sauces = "sauce",

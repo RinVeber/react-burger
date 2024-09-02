@@ -1,7 +1,7 @@
 import style from "./style.module.scss";
 import doneIcon from "../../images/done.gif";
 import React from "react";
-import { useAppSelector } from "../services/store";
+import { useAppSelector } from "../../services/store";
 
 export default function OrderDetails() {
   const { orderDetails, orderNumber } = useAppSelector((store) => store.burgerConstructor);

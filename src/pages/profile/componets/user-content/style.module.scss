@@ -1,0 +1,14 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+    max-width: 480px;
+  }
+  
+  .handlers {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 100%;
+  }

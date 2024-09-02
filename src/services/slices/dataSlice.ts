@@ -2,8 +2,8 @@ import {
   ActionReducerMapBuilder,
   createSlice,
 } from "@reduxjs/toolkit";
-import {  IDataItem } from "../../../utils/data";
-import { TabStatus } from "../../burger-ingredients/burger-ingredients";
+import {  IDataItem } from "../../utils/data";
+import { TabStatus } from "../../componets/burger-ingredients/burger-ingredients";
 import { getAllIngredientsAction } from "../actions/actions";
 
 interface State {
