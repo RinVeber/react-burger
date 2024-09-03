@@ -2,8 +2,8 @@ import {
   ActionReducerMapBuilder,
   createSlice,
 } from "@reduxjs/toolkit";
-import {  IDataItem } from "../../../utils/data";
-import { TabStatus } from "../../burger-ingredients/burger-ingredients";
+import {  IDataItem } from "../../utils/data";
+import { TabStatus } from "../../componets/burger-ingredients/burger-ingredients";
 import { getAllIngredientsAction } from "../actions/actions";
 
 interface State {
@@ -11,12 +11,14 @@ interface State {
   success: boolean;
   errorMessage: unknown;
   ingredientsCurrentTab: TabStatus;
+  isModal: boolean;
   status: "init" | "loading" | "success" | "error";
   selectedIngredient: IDataItem | null;
 }
 
 const dataState: State = {
   ingredients: [],
+  isModal: false,
   success: false,
   errorMessage: null,
   ingredientsCurrentTab: TabStatus.buns,
@@ -38,7 +40,8 @@ export const dataSlice = createSlice({
       state.ingredientsCurrentTab = action.payload;
     },
     getCurrentIngredientAction: (state, action) => {
-      state.selectedIngredient = action.payload;
+      state.selectedIngredient = action.payload.selectedIngredient;
+      state.isModal = action.payload.isModal
     },
     removeCurrentIngredientAction: (state) => {
       state.selectedIngredient = null;

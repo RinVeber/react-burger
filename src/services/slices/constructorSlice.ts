@@ -4,7 +4,7 @@ import {
   nanoid,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { IDataItem } from "../../../utils/data";
+import { IDataItem } from "../../utils/data";
 import { sendOrderAction } from "../actions/actions";
 
 interface Order {

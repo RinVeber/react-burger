@@ -3,7 +3,7 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useAppSelector } from "../../services/store";
+import { useAppSelector } from "../../../services/store";
 import React from "react";
 import { useDrag } from "react-dnd";
 
