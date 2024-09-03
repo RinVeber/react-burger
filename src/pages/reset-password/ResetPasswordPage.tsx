@@ -44,8 +44,6 @@ export function ResetPasswordPage() {
           value={codeValue}
           name={"code"}
           errorText={"Код введен неверно"}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         />
           {resetPassMessage && <span className={styles.errorText}>{resetPassMessage}</span>}
         <Button htmlType="submit" type="primary" size="medium">

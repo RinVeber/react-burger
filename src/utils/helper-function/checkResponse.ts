@@ -7,6 +7,6 @@ export const checkResponse = (res: Response) => {
   return Promise.reject(`Ошибка ${res.status}`);
 };
 
-export function request(url: RequestInfo | URL, options: any) {
+export function request(url: RequestInfo | URL, options: RequestInit) {
   return fetch(BASE_URL + url, options).then(checkResponse);
 }

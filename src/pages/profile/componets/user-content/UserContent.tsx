@@ -4,21 +4,21 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../services/store";
-import {
-  sendChangeUserInfoRequestAction,
-} from "../../../../services/actions/actions";
+import { useAppDispatch, useAppSelector } from "../../../../services/store";
+import { sendChangeUserInfoRequestAction } from "../../../../services/actions/actions";
+import { useForm } from "../../../../utils/hooks/useForm";
+import { IUserInfo } from "../../../../services/entities/authApi";
+import { getUserInfo } from "../../../../services/slices/authSlice";
 
 export function UserContent() {
-  const { userInfo } = useAppSelector((store) => store.auth);
+  const userInfo = useAppSelector(getUserInfo);
 
   const dispatch = useAppDispatch();
-  const [nameValue, setNameValue] = React.useState(userInfo?.name || 'Your name');
-  const [emailValue, setEmailValue] = React.useState(userInfo?.email || 'test@mailmail.ru');
-  const [passwordValue, setPasswordValue] = React.useState("test123");
+  const {values, setValues, handleChange} = useForm<IUserInfo>({
+    name: '',
+    email: '',
+    password: ''
+  })
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passRef = React.useRef<HTMLInputElement>(null);
@@ -29,18 +29,9 @@ export function UserContent() {
 
   const [isProfileEditing, setProfileEditing] = React.useState(false);
 
-
-  const setData = (userInfo: any) => {
-    setNameValue(userInfo.name);
-    setEmailValue(userInfo.email);
-    setPasswordValue(userInfo.password);
-  };
-
   React.useEffect(() => {
-    if (userInfo) {
-      setData(userInfo);
-    }
-  }, []);
+    userInfo && setValues(userInfo);
+  }, [userInfo, setValues]);
 
   const onNameEditIconClick = (e: React.MouseEvent) => {
     setProfileEditing(true);
@@ -70,9 +61,9 @@ export function UserContent() {
     e.preventDefault();
     dispatch(
       sendChangeUserInfoRequestAction({
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
+        name: values.name,
+        email: values.email,
+        password: values.password,
       })
     );
     stopEditoring();
@@ -83,20 +74,23 @@ export function UserContent() {
   };
 
   const stopEditoring = () => {
-    setData(userInfo);
+    if (userInfo) {
+      setValues(userInfo);
+    }
     setProfileEditing(false);
     setPassFieldState(true);
     setNameFieldState(true);
     setEmailFieldState(true);
   };
 
+
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <Input
         type={"text"}
-        placeholder={"Имя"}
-        onChange={(e) => setNameValue(e.target.value)}
-        value={nameValue}
+        placeholder={"Ваше имя"}
+        onChange={(e) => handleChange(e)}
+        value={values.name}
         error={false}
         name={"name"}
         errorText={"Ошибка. Проверьте корректность ввода имени"}
@@ -104,35 +98,29 @@ export function UserContent() {
         onIconClick={onNameEditIconClick}
         ref={nameRef}
         disabled={nameFieldState}
-        onPointerEnterCapture={false}
-        onPointerLeaveCapture={false}
       />
       <Input
-        onChange={(e) => setEmailValue(e.target.value)}
-        value={emailValue}
+        onChange={(e) =>handleChange(e)}
+        value={values.email}
         name={"email"}
         errorText={"Ошибка. проверьте правильность почты"}
-        placeholder={"Логин"}
+        placeholder={"Ваша почта"}
         icon={"EditIcon"}
         onIconClick={onEmailIconClick}
         ref={emailRef}
         disabled={emailFieldState}
-        onPointerEnterCapture={false}
-        onPointerLeaveCapture={false}
       />
       <Input
         type="password"
-        onChange={(e) => setPasswordValue(e.target.value)}
-        value={passwordValue}
+        onChange={(e) => handleChange(e)}
+        value={values.password!}
         name={"password"}
         errorText={"Ошибка. Введите другой пароль"}
         icon={"EditIcon"}
-        placeholder={"Пароль"}
+        placeholder={"Ваш пароль"}
         ref={passRef}
         onIconClick={onPassIconClick}
         disabled={passFieldState}
-        onPointerEnterCapture={false}
-        onPointerLeaveCapture={false}
       />
       {isProfileEditing && (
         <div className={styles.handlers}>

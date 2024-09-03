@@ -1,16 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../utils/data";
 import { getCookie, setCookie } from "../../utils/helper-function/cockie";
-import { useAppDispatch } from "../store";
+
+export interface IUserInfo {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export interface RegisterResponse {
   accessToken: string;
   refreshToken: string;
   success: boolean;
-  userInfo: {
-    name: string;
-    email: string;
-  };
+  userInfo: IUserInfo
 }
 
 export const authApi = createApi({

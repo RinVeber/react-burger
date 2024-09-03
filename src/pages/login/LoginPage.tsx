@@ -10,22 +10,27 @@ import { useAppDispatch, useAppSelector } from "../../services/store";
 import { paths } from "../../router/paths";
 import { useLoginMutation } from "../../services/entities/authApi";
 import { setUserAction } from "../../services/slices/authSlice";
+import { useForm } from "../../utils/hooks/useForm";
 
 export function LoginPage() {
   const { loginFail, isLoginSuccess } = useAppSelector((store) => store.auth);
-  const [emailValue, setEmailValue] = React.useState("");
-  const [passwordValue, setPasswordValue] = React.useState("");
+
+  const {values, handleChange} = useForm({
+    password: '',
+    email: '',
+  })
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loginUser, _] = useLoginMutation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (emailValue && passwordValue) {
+    if (values.email && values.password) {
       try {
         const response = await loginUser({
-          email: emailValue,
-          password: passwordValue,
+          email: values.email,
+          password: values.password,
         }).unwrap();
         if (response.success) {
           dispatch(
@@ -55,14 +60,15 @@ export function LoginPage() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className="text text_type_main-medium">Вход</h1>
         <EmailInput
-          onChange={(e) => setEmailValue(e.target.value)}
-          value={emailValue}
+          onChange={(e) => handleChange(e)}
+          value={values.email}
           name={"email"}
           isIcon={false}
+          errorText={'Введена не корректная почта'}
         />
         <PasswordInput
-          onChange={(e) => setPasswordValue(e.target.value)}
-          value={passwordValue}
+          onChange={(e) => handleChange(e)}
+          value={values.password}
           name={"password"}
         />
         {loginFail && (

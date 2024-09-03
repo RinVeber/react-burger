@@ -10,7 +10,6 @@ import { ProfilePage } from "../pages/profile/ProfilePage";
 import { UserContent } from "../pages/profile/componets/user-content/UserContent";
 import { OrderHistory } from "../pages/profile/componets/orders-history/OrdersHistory";
 import {
-  loaderSendUserInfo,
   ProtectedRouteElement,
 } from "./ProtectedRouteElement";
 import { IngredientPage } from "../pages/ingredient/IngredientPage";
@@ -33,13 +32,13 @@ export const router = createBrowserRouter([
       {
         path: paths.register,
         element: (
-          <ProtectedRouteElement isAuth={false} page={<RegisterPage />} />
+          <ProtectedRouteElement isAuth={false} page={<RegisterPage />} isNotForAuthorized={true} />
         ),
       },
       {
         path: paths.login,
         element: (
-          <ProtectedRouteElement isAuth={false} page={<LoginPage />} />
+          <ProtectedRouteElement isAuth={false} page={<LoginPage />} isNotForAuthorized={true} />
         ),
       },
       {
@@ -47,6 +46,7 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRouteElement
             isAuth={false}
+            isNotForAuthorized={true}
             page={<ForgotPasswordPage />}
           />
         ),
@@ -56,6 +56,7 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRouteElement
             isAuth={false}
+            isNotForAuthorized={true}
             page={<ResetPasswordPage />}
           />
         ),
@@ -63,7 +64,7 @@ export const router = createBrowserRouter([
       {
         path: paths.profile,
         element: (
-          <ProtectedRouteElement isAuth={true} page={<ProfilePage />} />
+          <ProtectedRouteElement isAuth={true} page={<ProfilePage />} isNotForAuthorized={false}/>
         ),
         children: [
           {

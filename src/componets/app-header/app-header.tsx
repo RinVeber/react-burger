@@ -18,7 +18,7 @@ const styleForHeaderWrapper = {
 
 function AppHeader() {
   const location = useLocation();
-  const { userInfo } = useAppSelector((store) => store.auth);
+  const userInfo = useAppSelector((store) => store.auth.userInfo);
 
   const setIconType = (url: string) =>
     location.pathname === url ? "primary" : "secondary";
@@ -44,10 +44,10 @@ function AppHeader() {
           </li>
           <li className={`${styles.navigationLink} p-5`}>
             <NavLink
-              className={setLinkStyle("/profile/orders")}
-              to="/profile/orders"
+              className={setLinkStyle(paths.orderHistory)}
+              to={paths.orderHistory}
             >
-              <ListIcon type={setIconType("/profile/orders")} />
+              <ListIcon type={setIconType(paths.orderHistory)} />
               <span
                 className={`${styles.navigationText} text text_type_main-default ml-2`}
               >

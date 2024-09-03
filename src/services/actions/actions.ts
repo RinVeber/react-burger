@@ -106,7 +106,7 @@ export const sendChangeUserInfoRequestAction = createAsyncThunk(
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        authorization: token,
+        authorization: token as string,
       },
       body: JSON.stringify({ name, email, password }),
     });
@@ -121,7 +121,7 @@ export const sendUserInfoRequestAction = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
         authorization: getCookie("accessToken"),
-      },
+      } as HeadersInit ,
     });
 
     if (response.success) {

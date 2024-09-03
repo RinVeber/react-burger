@@ -12,12 +12,14 @@ import {
 } from "../actions/actions";
 import { RegisterResponse } from "../entities/authApi";
 import { getCookie } from "../../utils/helper-function/cockie";
+import { RootState, useAppSelector } from "../store";
 
 interface State {
   userInfoSuccess: boolean | null;
-  changeUserInfoSuccess: boolean ;
+  changeUserInfoSuccess: boolean;
   accessToken: string | null;
   refreshToken: string | null;
+  isUserInfoLoading: boolean;
   password: string | null;
   registrSuccess: boolean | null;
   loginFail: boolean | null;
@@ -41,6 +43,7 @@ const constructorState: State = {
   password: null,
   registrSuccess: null,
   isLoginSuccess: null,
+  isUserInfoLoading: false,
   loginFail: null,
   userInfo: null,
   forgotPassMessage: null,
@@ -83,14 +86,17 @@ export const authSlice = createSlice({
           email: action.payload.user.email,
         };
         state.userInfoSuccess = true;
+        state.isUserInfoLoading = false;
         state.status = "success";
       })
       .addCase(sendUserInfoRequestAction.pending, (state, action) => {
         state.status = "loading";
+        state.isUserInfoLoading = true;
       })
       .addCase(sendUserInfoRequestAction.rejected, (state, action) => {
         state.errorMessage = action.payload;
         state.userInfoSuccess = false;
+        state.isUserInfoLoading = false;
         state.success = false;
         state.status = "error";
       })
@@ -154,6 +160,8 @@ export const authSlice = createSlice({
       });
   },
 });
+
+export const getUserInfo = (store: RootState) => store.auth.userInfo;
 
 export const { setUserAction, clearUserAction } = authSlice.actions;
 export const authReducer = authSlice.reducer;
