@@ -10,8 +10,10 @@ export function getIngredientCards(
     mains: JSX.Element[] = [],
     sauces: JSX.Element[] = [];
 
+
   data.forEach((element: IDataItem) => {
     const ingredientCard = (
+    
       <IngredientItem
         key={element._id}
         openId={element._id}

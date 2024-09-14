@@ -9,6 +9,7 @@ import {
   toggleIngredientsTabAction,
 } from '../../services/slices/dataSlice';
 import {TabStatus} from '../burger-ingredients/burger-ingredients';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 interface Props {
   bunsRef: React.RefObject<HTMLDivElement>;
@@ -29,18 +30,28 @@ export default function Ingredients({bunsRef, saucesRef, mainsRef}: Props) {
     (store) => store.data,
   );
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const openIngredientPop = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
   ) => {
     const target = e.currentTarget as EventTarget & HTMLLIElement;
-    dispatch(
-      getCurrentIngredientAction({
-        selectedIngredient: findElement(target, ingredients),
-        isModal: true,
-      }),
-    );
+    const selectedIngredient = findElement(target, ingredients);
+    if (selectedIngredient) {
+      dispatch(
+        getCurrentIngredientAction({
+          selectedIngredient: selectedIngredient,
+          isModal: true,
+        }),
+      );
+      navigate(`/ingredients/${selectedIngredient._id}`, {
+        replace: true,
+        state: {from: location},
+      });
+    }
   };
-  const separatedData = getIngredientCards(ingredients, openIngredientPop);
+  const separatedData = getIngredientCards(ingredients, openIngredientPop, );
 
   const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const newRow = currentRow(e.currentTarget);

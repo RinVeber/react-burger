@@ -3,7 +3,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/di
 import style from "./style.module.scss";
 
 interface Props {
-  close: () => void;
+  close?: () => void;
   children: ReactNode;
 }
 

@@ -1,4 +1,4 @@
-import {createBrowserRouter} from 'react-router-dom';
+import {createBrowserRouter, useLocation} from 'react-router-dom';
 import {App, loaderIngredientsFull} from '../componets/app/app';
 import MainLayout from '../componets/main-layout/main-layout';
 import {paths} from './paths';
@@ -11,6 +11,7 @@ import {UserContent} from '../pages/profile/componets/user-content/UserContent';
 import {OrderHistory} from '../pages/profile/componets/orders-history/OrdersHistory';
 import {ProtectedRouteElement} from './ProtectedRouteElement';
 import {IngredientPage} from '../pages/ingredient/IngredientPage';
+import ModalSwitch from '../componets/ModalSwitch/ModalSwitch';
 
 export const router = createBrowserRouter([
   {
@@ -22,11 +23,12 @@ export const router = createBrowserRouter([
         path: paths.main,
         element: <MainLayout />,
       },
+
       {
         path: paths.ingredients,
-
-        element: <IngredientPage />,
+        element: <ModalSwitch component={<IngredientPage />} />,
       },
+
       {
         path: paths.register,
         element: (

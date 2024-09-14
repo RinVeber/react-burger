@@ -45,7 +45,7 @@ export default function RegisterPage() {
           value={emailValue}
           name={"email"}
           isIcon={false}
-          errorText={"Проверьте правильность почты"}
+          // errorText={"Проверьте правильность почты"}
         />
         <PasswordInput
           onChange={(e) => setPasswordValue(e.target.value)}

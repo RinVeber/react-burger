@@ -41,7 +41,7 @@ export function ForgotPasswordPage() {
           value={emailValue}
           name={"email"}
           isIcon={false}
-          errorText={"Введена не правильная почта"}
+          // errorText={"Введена не правильная почта"}
         />
         <Button htmlType="submit" type="primary" size="medium">
           Восстановить

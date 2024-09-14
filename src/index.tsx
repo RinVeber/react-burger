@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider, useLocation } from "react-router-dom";
 import { router } from "./router/router";
 import ErrorBoundary from "./utils/error-boundary/error-boundary";
 import { Provider } from "react-redux";
@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router}  />
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,

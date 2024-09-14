@@ -68,7 +68,7 @@ export function LoginPage() {
           value={values.email}
           name={"email"}
           isIcon={false}
-          errorText={"Введена не корректная почта"}
+          // errorText={"Введена не корректная почта."}
         />
         <PasswordInput
           onChange={(e) => handleChange(e)}

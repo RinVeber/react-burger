@@ -52,9 +52,6 @@ export default function BurgerIngredients() {
     }
   };
 
-  const closeIngredientPop = () => {
-    dispatch(removeCurrentIngredientAction());
-  };
 
   return (
     <React.Fragment>
@@ -92,11 +89,6 @@ export default function BurgerIngredients() {
           mainsRef={mainsRef}
         />
       </div>
-      {selectedIngredient && isModal && (
-        <Modal header="Детали ингредиента" onClose={closeIngredientPop}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </React.Fragment>
   );
 }
