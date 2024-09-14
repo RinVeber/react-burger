@@ -52,7 +52,7 @@ export default function IngredientItem({
     <li
       ref={drag}
       className={style.item}
-      onClick={(e) => onOpen(e)}
+      onClick={onOpen}
       id={openId}
       style={isDrag ? { opacity: 0.5 } : { opacity: 1 }}
     >

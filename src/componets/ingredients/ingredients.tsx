@@ -1,14 +1,14 @@
-import style from "./style.module.scss";
-import { IDataItem } from "../../utils/data";
-import IngredientCategory from "./ingredient-category/ingredient-category";
-import { getIngredientCards } from "../../utils/helper-function/getCard";
-import { useAppDispatch, useAppSelector } from "../../services/store";
-import { currentRow } from "./ingredient-item/helper";
+import style from './style.module.scss';
+import {IDataItem} from '../../utils/data';
+import IngredientCategory from './ingredient-category/ingredient-category';
+import {getIngredientCards} from '../../utils/helper-function/getCard';
+import {useAppDispatch, useAppSelector} from '../../services/store';
+import {currentRow} from './ingredient-item/helper';
 import {
   getCurrentIngredientAction,
   toggleIngredientsTabAction,
-} from "../../services/slices/dataSlice";
-import { TabStatus } from "../burger-ingredients/burger-ingredients";
+} from '../../services/slices/dataSlice';
+import {TabStatus} from '../burger-ingredients/burger-ingredients';
 
 interface Props {
   bunsRef: React.RefObject<HTMLDivElement>;
@@ -17,29 +17,28 @@ interface Props {
 }
 
 const findElement = <T extends IDataItem>(
-  target: EventTarget & HTMLDivElement,
+  target: EventTarget & HTMLLIElement,
   items: T[],
 ): T | undefined => {
   return items.find((item) => item._id === target.id);
 };
 
-export default function Ingredients({ bunsRef, saucesRef, mainsRef }: Props) {
+export default function Ingredients({bunsRef, saucesRef, mainsRef}: Props) {
   const dispatch = useAppDispatch();
-  const { ingredients, ingredientsCurrentTab } = useAppSelector(
+  const {ingredients, ingredientsCurrentTab} = useAppSelector(
     (store) => store.data,
   );
 
   const openIngredientPop = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
   ) => {
-    if (e.currentTarget instanceof HTMLDivElement) {
-      dispatch(
-        getCurrentIngredientAction({
-          selectedIngredient: findElement(e.currentTarget, ingredients),
-          isModal: true,
-        }),
-      );
-    }
+    const target = e.currentTarget as EventTarget & HTMLLIElement;
+    dispatch(
+      getCurrentIngredientAction({
+        selectedIngredient: findElement(target, ingredients),
+        isModal: true,
+      }),
+    );
   };
   const separatedData = getIngredientCards(ingredients, openIngredientPop);
 
