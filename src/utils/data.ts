@@ -251,4 +251,3 @@ export const IngredientPropType = PropTypes.shape({
   image_large: PropTypes.string,
   __v: PropTypes.number,
 });
-

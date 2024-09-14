@@ -17,7 +17,7 @@ import { getCurrentIngredientAction } from "../../services/slices/dataSlice";
 
 export function IngredientPage() {
   const { ingredients, selectedIngredient } = useAppSelector(
-    (store) => store.data
+    (store) => store.data,
   );
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -27,7 +27,12 @@ export function IngredientPage() {
   const findIngredient = ingredients.find((item) => item._id === params.id);
 
   if (findIngredient) {
-    dispatch(getCurrentIngredientAction({selectedIngredient: findIngredient, isModal: false}));
+    dispatch(
+      getCurrentIngredientAction({
+        selectedIngredient: findIngredient,
+        isModal: false,
+      }),
+    );
   }
 
   if (!selectedIngredient) {

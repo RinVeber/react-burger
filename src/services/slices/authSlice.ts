@@ -10,7 +10,7 @@ import {
   sendResetPassRequestAction,
   sendUserInfoRequestAction,
 } from "../actions/actions";
-import { RegisterResponse } from "../entities/authApi";
+import { IUserInfo, RegisterResponse } from "../entities/authApi";
 import { getCookie } from "../../utils/helper-function/cockie";
 import { RootState, useAppSelector } from "../store";
 
@@ -23,10 +23,10 @@ interface State {
   password: string | null;
   registrSuccess: boolean | null;
   loginFail: boolean | null;
-  userInfo: any;
+  userInfo: IUserInfo | null;
   isLoginSuccess: boolean | null;
   forgotPassSuccess: boolean | null;
-  forgotPassMessage: any;
+  forgotPassMessage: string | null;
   resetPassSuccess: boolean | null;
   resetPassMessage: string | null;
   logoutSuccess: boolean | null;

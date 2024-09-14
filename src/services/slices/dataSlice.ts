@@ -1,8 +1,5 @@
-import {
-  ActionReducerMapBuilder,
-  createSlice,
-} from "@reduxjs/toolkit";
-import {  IDataItem } from "../../utils/data";
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
+import { IDataItem } from "../../utils/data";
 import { TabStatus } from "../../componets/burger-ingredients/burger-ingredients";
 import { getAllIngredientsAction } from "../actions/actions";
 
@@ -41,7 +38,7 @@ export const dataSlice = createSlice({
     },
     getCurrentIngredientAction: (state, action) => {
       state.selectedIngredient = action.payload.selectedIngredient;
-      state.isModal = action.payload.isModal
+      state.isModal = action.payload.isModal;
     },
     removeCurrentIngredientAction: (state) => {
       state.selectedIngredient = null;

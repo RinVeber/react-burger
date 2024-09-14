@@ -19,7 +19,7 @@ export enum TabStatus {
 export default function BurgerIngredients() {
   const dispatch = useAppDispatch();
   const { selectedIngredient, ingredientsCurrentTab, isModal } = useAppSelector(
-    (store) => store.data
+    (store) => store.data,
   );
 
   const bunsRef = React.useRef<HTMLDivElement>(null);

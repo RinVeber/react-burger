@@ -16,7 +16,7 @@ import { paths } from "../../router/paths";
 export default function PriceInfo() {
   const dispatch = useAppDispatch();
   const { selectedBun, selectedIngredients } = useAppSelector(
-    (store) => store.burgerConstructor
+    (store) => store.burgerConstructor,
   );
 
   const { userInfo } = useAppSelector((store) => store.auth);
@@ -33,7 +33,7 @@ export default function PriceInfo() {
   const orderClick = () => {
     if (userInfo) {
       const dataIds = fullOrder.map((item) => item._id);
-      dispatch(sendOrderAction(dataIds));
+      dispatch(sendOrderAction({ ingredients: dataIds }));
       openModal();
     } else {
       navigate(paths.login, { replace: true });
@@ -46,7 +46,7 @@ export default function PriceInfo() {
         currentItem.type === "bun"
           ? acc + currentItem.price * 2
           : acc + currentItem.price,
-      0
+      0,
     );
   }, [fullOrder]);
 

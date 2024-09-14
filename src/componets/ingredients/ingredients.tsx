@@ -16,26 +16,30 @@ interface Props {
   mainsRef: React.RefObject<HTMLDivElement>;
 }
 
-const findElement = (
+const findElement = <T extends IDataItem>(
   target: EventTarget & HTMLDivElement,
-  items: IDataItem[]
-) => {
+  items: T[],
+): T | undefined => {
   return items.find((item) => item._id === target.id);
 };
 
 export default function Ingredients({ bunsRef, saucesRef, mainsRef }: Props) {
   const dispatch = useAppDispatch();
   const { ingredients, ingredientsCurrentTab } = useAppSelector(
-    (store) => store.data
+    (store) => store.data,
   );
 
-  const openIngredientPop = (e: any) => {
-    dispatch(
-      getCurrentIngredientAction({
-        selectedIngredient: findElement(e.currentTarget, ingredients),
-        isModal: true,
-      })
-    );
+  const openIngredientPop = (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+  ) => {
+    if (e.currentTarget instanceof HTMLDivElement) {
+      dispatch(
+        getCurrentIngredientAction({
+          selectedIngredient: findElement(e.currentTarget, ingredients),
+          isModal: true,
+        }),
+      );
+    }
   };
   const separatedData = getIngredientCards(ingredients, openIngredientPop);
 

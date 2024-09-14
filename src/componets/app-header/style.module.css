@@ -1,5 +1,5 @@
 header.appHeader {
-  background-color: #1C1C21;
+  background-color: #1c1c21;
   height: 88px;
   box-sizing: border-box;
   display: flex;
@@ -52,21 +52,21 @@ header.appHeader ul.navigationBar li.navigationLink .navigationText {
   border: none;
   background: transparent;
   border-radius: 40px;
-	color: #8585AD;
-	text-decoration: none;
-	transition: all .3s ease;
+  color: #8585ad;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .link_active {
-	color: white;
+  color: white;
 }
 
 .link:hover {
-	box-shadow: 0px 0px 4px 0px #FFFFFF40;
+  box-shadow: 0px 0px 4px 0px #ffffff40;
 }
 
 .link_active svg {
-	fill: white;
+  fill: white;
 }
 
 .linkText {

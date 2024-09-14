@@ -4,10 +4,34 @@ import { loadOrderFailAction } from "../slices/constructorSlice";
 import { request } from "../../utils/helper-function/checkResponse";
 import { getCookie, setCookie } from "../../utils/helper-function/cockie";
 import { fetchWithRefresh } from "../../utils/helper-function/fetchWithRefresh";
+import { IUserInfo } from "../entities/authApi";
+import { IDataItem } from "../../utils/data";
 
-export const sendOrderAction = createAsyncThunk(
+interface ResponseServer<T> {
+  data: T extends IDataItem ? T : never;
+  user: T extends IUserInfo ? T : never;
+  message?: string;
+  success: boolean;
+}
+
+interface ResponseServerOrder {
+  name: string;
+  order: { number: number };
+  success: boolean;
+}
+
+interface OrderData {
+  ingredients: string[];
+}
+
+interface ResponseServerMain {
+  message: string;
+  success: boolean;
+}
+
+export const sendOrderAction = createAsyncThunk<ResponseServerOrder, OrderData>(
   "constructor/sendOrderAction",
-  async (data: string[], { dispatch }) => {
+  async (data: OrderData, { dispatch }) => {
     const response = await request(`/orders`, {
       method: "POST",
       headers: {
@@ -21,26 +45,28 @@ export const sendOrderAction = createAsyncThunk(
     } else {
       dispatch(loadOrderFailAction(response));
     }
-  }
+  },
 );
 
-export const getAllIngredientsAction = createAsyncThunk(
-  "data/getAllIngredientsAction",
-  async (_, { dispatch, rejectWithValue }) => {
-    const response = await request(`/ingredients`, {
-      method: "GET",
-    });
+export const getAllIngredientsAction = createAsyncThunk<
+  ResponseServer<IDataItem[]>
+>("data/getAllIngredientsAction", async (_, { dispatch, rejectWithValue }) => {
+  const response = await request(`/ingredients`, {
+    method: "GET",
+  });
 
-    if (response.success) {
-      return response;
-    } else {
-      dispatch(loadOrderFailAction(loadDataFailAction));
-    }
-    return rejectWithValue
+  if (response.success) {
+    return response;
+  } else {
+    dispatch(loadOrderFailAction(loadDataFailAction));
   }
-);
+  return rejectWithValue;
+});
 
-export const sendEmailAction = createAsyncThunk(
+export const sendEmailAction = createAsyncThunk<
+  ResponseServerMain,
+  { email: string }
+>(
   "auth/sendEmailAction",
   async ({ email }: { email: string }, { dispatch, rejectWithValue }) => {
     const response = await request(`/password-reset`, {
@@ -55,14 +81,17 @@ export const sendEmailAction = createAsyncThunk(
       return response;
     }
     return rejectWithValue;
-  }
+  },
 );
 
-export const sendResetPassRequestAction = createAsyncThunk(
+export const sendResetPassRequestAction = createAsyncThunk<
+  ResponseServerMain,
+  { password: string; code: string }
+>(
   "auth/sendResetPassRequestAction",
   async (
     { password, code }: { password: string; code: string },
-    { dispatch, rejectWithValue }
+    { dispatch, rejectWithValue },
   ) => {
     const response = await request(`/password-reset/reset`, {
       method: "POST",
@@ -76,10 +105,10 @@ export const sendResetPassRequestAction = createAsyncThunk(
       return response;
     }
     return rejectWithValue;
-  }
+  },
 );
 
-export const sendLogoutRequestAction = createAsyncThunk(
+export const sendLogoutRequestAction = createAsyncThunk<ResponseServerMain>(
   "auth/sendLogoutRequestAction",
   async (_, { dispatch, rejectWithValue }) => {
     const response = await request(`/auth/logout`, {
@@ -95,12 +124,15 @@ export const sendLogoutRequestAction = createAsyncThunk(
     }
 
     return rejectWithValue;
-  }
+  },
 );
 
-export const sendChangeUserInfoRequestAction = createAsyncThunk(
+export const sendChangeUserInfoRequestAction = createAsyncThunk<
+  ResponseServer<IUserInfo>,
+  IUserInfo
+>(
   "auth/sendChangeUserInfoRequestAction",
-  async ({ name, email, password }: any, { dispatch }) => {
+  async ({ name, email, password }: IUserInfo, { dispatch }) => {
     const token = getCookie("accessToken");
     return fetchWithRefresh(`/auth/user`, {
       method: "PATCH",
@@ -110,10 +142,12 @@ export const sendChangeUserInfoRequestAction = createAsyncThunk(
       },
       body: JSON.stringify({ name, email, password }),
     });
-  }
+  },
 );
 
-export const sendUserInfoRequestAction = createAsyncThunk(
+export const sendUserInfoRequestAction = createAsyncThunk<
+  ResponseServer<IUserInfo>
+>(
   "auth/sendUserInfoRequestAction",
   async (_, { dispatch, rejectWithValue }) => {
     const response = await request(`/auth/user`, {
@@ -121,12 +155,12 @@ export const sendUserInfoRequestAction = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
         authorization: getCookie("accessToken"),
-      } as HeadersInit ,
+      } as HeadersInit,
     });
 
     if (response.success) {
       return response;
     }
     return rejectWithValue;
-  }
+  },
 );

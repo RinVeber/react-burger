@@ -51,7 +51,7 @@ export const constructorSlice = createSlice({
         } else {
           state.selectedIngredients = [
             action.payload,
-            ...state.selectedIngredients
+            ...state.selectedIngredients,
           ];
         }
       },
@@ -62,7 +62,7 @@ export const constructorSlice = createSlice({
 
     removeIngredientAction: (state, action) => {
       const indexToRemove = state.selectedIngredients.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item._id === action.payload._id,
       );
       if (indexToRemove !== -1) {
         state.selectedIngredients.splice(indexToRemove, 1);

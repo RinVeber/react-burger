@@ -12,7 +12,9 @@ import { paths } from "../../router/paths";
 import { sendResetPassRequestAction } from "../../services/actions/actions";
 
 export function ResetPasswordPage() {
-  const { forgotPassSuccess, resetPassMessage } = useAppSelector((store) => store.auth);
+  const { forgotPassSuccess, resetPassMessage } = useAppSelector(
+    (store) => store.auth,
+  );
   const [codeValue, setCodeValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const dispatch = useAppDispatch();
@@ -20,7 +22,12 @@ export function ResetPasswordPage() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordValue && codeValue) {
-      dispatch(sendResetPassRequestAction({password: passwordValue, code: codeValue}));
+      dispatch(
+        sendResetPassRequestAction({
+          password: passwordValue,
+          code: codeValue,
+        }),
+      );
     }
   };
 
@@ -45,7 +52,9 @@ export function ResetPasswordPage() {
           name={"code"}
           errorText={"Код введен неверно"}
         />
-          {resetPassMessage && <span className={styles.errorText}>{resetPassMessage}</span>}
+        {resetPassMessage && (
+          <span className={styles.errorText}>{resetPassMessage}</span>
+        )}
         <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>

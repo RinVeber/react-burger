@@ -12,13 +12,18 @@ import { useLoginMutation } from "../../services/entities/authApi";
 import { setUserAction } from "../../services/slices/authSlice";
 import { useForm } from "../../utils/hooks/useForm";
 
+interface FormProps {
+  password: string;
+  email: string;
+}
+
 export function LoginPage() {
   const { loginFail, isLoginSuccess } = useAppSelector((store) => store.auth);
 
-  const {values, handleChange} = useForm({
-    password: '',
-    email: '',
-  })
+  const { values, handleChange } = useForm<FormProps>({
+    password: "",
+    email: "",
+  });
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -39,7 +44,7 @@ export function LoginPage() {
               accessToken: response.accessToken,
               refreshToken: response.refreshToken,
               success: response.success,
-            })
+            }),
           );
         }
       } catch (error) {
@@ -47,7 +52,6 @@ export function LoginPage() {
       }
     }
   };
-  
 
   React.useEffect(() => {
     if (isLoginSuccess) {
@@ -64,7 +68,7 @@ export function LoginPage() {
           value={values.email}
           name={"email"}
           isIcon={false}
-          errorText={'Введена не корректная почта'}
+          errorText={"Введена не корректная почта"}
         />
         <PasswordInput
           onChange={(e) => handleChange(e)}

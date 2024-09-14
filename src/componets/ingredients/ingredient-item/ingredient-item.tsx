@@ -11,7 +11,7 @@ interface Props {
   name: string;
   price: number;
   image: string;
-  onOpen: () => void;
+  onOpen: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   openId: string;
   type: string;
   index: string;
@@ -27,7 +27,7 @@ export default function IngredientItem({
   index,
 }: Props) {
   const { selectedIngredients, selectedBun } = useAppSelector(
-    (store) => store.burgerConstructor
+    (store) => store.burgerConstructor,
   );
   const count = React.useMemo(() => {
     if (type === "bun" && selectedBun) {
@@ -35,7 +35,7 @@ export default function IngredientItem({
     } else {
       return selectedIngredients.reduce(
         (acc, item) => (item._id === openId ? ++acc : acc),
-        0
+        0,
       );
     }
   }, [openId, selectedIngredients, selectedBun]);
@@ -52,7 +52,7 @@ export default function IngredientItem({
     <li
       ref={drag}
       className={style.item}
-      onClick={onOpen}
+      onClick={(e) => onOpen(e)}
       id={openId}
       style={isDrag ? { opacity: 0.5 } : { opacity: 1 }}
     >

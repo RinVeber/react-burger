@@ -15,7 +15,6 @@ export interface PropsContext {
 export default function MainLayout() {
   const { ingredients, status } = useAppSelector((store) => store.data);
 
-
   return (
     <main className={style.main}>
       <DndProvider backend={HTML5Backend}>

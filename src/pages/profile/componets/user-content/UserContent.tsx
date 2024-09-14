@@ -12,13 +12,12 @@ import { getUserInfo } from "../../../../services/slices/authSlice";
 
 export function UserContent() {
   const userInfo = useAppSelector(getUserInfo);
-
   const dispatch = useAppDispatch();
-  const {values, setValues, handleChange} = useForm<IUserInfo>({
-    name: '',
-    email: '',
-    password: ''
-  })
+  const { values, setValues, handleChange } = useForm<IUserInfo>({
+    name: "",
+    email: "",
+    password: "",
+  });
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passRef = React.useRef<HTMLInputElement>(null);
@@ -64,7 +63,7 @@ export function UserContent() {
         name: values.name,
         email: values.email,
         password: values.password,
-      })
+      }),
     );
     stopEditoring();
   };
@@ -83,7 +82,6 @@ export function UserContent() {
     setEmailFieldState(true);
   };
 
-
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <Input
@@ -100,7 +98,7 @@ export function UserContent() {
         disabled={nameFieldState}
       />
       <Input
-        onChange={(e) =>handleChange(e)}
+        onChange={(e) => handleChange(e)}
         value={values.email}
         name={"email"}
         errorText={"Ошибка. проверьте правильность почты"}

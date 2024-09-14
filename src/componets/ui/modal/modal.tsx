@@ -7,7 +7,7 @@ import { ModalOverlay } from "./modal-overlay/modal-overlay";
 interface PropsModal {
   children?: ReactNode;
   header?: ReactNode;
-  onClose: (e?: any) => void;
+  onClose: () => void;
 }
 
 const modalRoot = document.getElementById("modalRoot") as
@@ -27,7 +27,6 @@ function Modal({ children, header, onClose }: PropsModal) {
     };
   }, [onClose]);
 
-
   return ReactDOM.createPortal(
     <React.Fragment>
       <div className={`${style.modal} p-10`}>
@@ -36,10 +35,8 @@ function Modal({ children, header, onClose }: PropsModal) {
       </div>
       <ModalOverlay close={onClose} />
     </React.Fragment>,
-    modalRoot
+    modalRoot,
   );
 }
-
-
 
 export default Modal;

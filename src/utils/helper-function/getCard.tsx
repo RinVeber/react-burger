@@ -1,7 +1,11 @@
-import IngredientItem from "../../componets/ingredients/ingredient-item/ingredient-item";
-import { IDataItem } from "../data";
+import React from 'react';
+import IngredientItem from '../../componets/ingredients/ingredient-item/ingredient-item';
+import {IDataItem} from '../data';
 
-export function getIngredientCards(data: IDataItem[], onOpen: any) {
+export function getIngredientCards(
+  data: IDataItem[],
+  onOpen: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void,
+) {
   const buns: JSX.Element[] = [],
     mains: JSX.Element[] = [],
     sauces: JSX.Element[] = [];
@@ -20,15 +24,15 @@ export function getIngredientCards(data: IDataItem[], onOpen: any) {
       />
     );
     switch (element.type) {
-      case "main": {
+      case 'main': {
         mains.push(ingredientCard);
         break;
       }
-      case "bun": {
+      case 'bun': {
         buns.push(ingredientCard);
         break;
       }
-      case "sauce": {
+      case 'sauce': {
         sauces.push(ingredientCard);
         break;
       }

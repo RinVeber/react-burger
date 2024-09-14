@@ -24,7 +24,7 @@ export function ProtectedRouteElement({
   const dispatch = useAppDispatch();
   const userInfoSuccess = useAppSelector((store) => store.auth.userInfoSuccess);
   const isUserInfoLoading = useAppSelector(
-    (store) => store.auth.isUserInfoLoading
+    (store) => store.auth.isUserInfoLoading,
   );
 
   React.useEffect(() => {
