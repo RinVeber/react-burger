@@ -19,7 +19,7 @@ interface FormProps {
 
 export function LoginPage() {
   const { loginFail, isLoginSuccess } = useAppSelector((store) => store.auth);
-
+const location = useLocation()
   const { values, handleChange } = useForm<FormProps>({
     password: "",
     email: "",
@@ -40,7 +40,7 @@ export function LoginPage() {
         if (response.success) {
           dispatch(
             setUserAction({
-              userInfo: response.userInfo,
+              user: response.user,
               accessToken: response.accessToken,
               refreshToken: response.refreshToken,
               success: response.success,
@@ -87,13 +87,13 @@ export function LoginPage() {
       <div className={styles.actions}>
         <p className="text text_type_main-default text_color_inactive">
           Вы — новый пользователь?&nbsp;
-          <Link to={paths.register} className={styles.actions__link}>
+          <Link to={paths.register} className={styles.actions__link} state={{from: location}} >
             Зарегистрироваться
           </Link>
         </p>
         <p className="text text_type_main-default text_color_inactive">
           Забыли пароль?&nbsp;
-          <Link to="/forgot-password" className={styles.actions__link}>
+          <Link to="/forgot-password" className={styles.actions__link}  state={{from: location}}>
             Восстановить пароль
           </Link>
         </p>

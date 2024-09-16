@@ -57,7 +57,7 @@ function AppHeader() {
           </li>
         </ul>
 
-        <Link to={paths.main} className={styles.logoWrapper}>
+        <Link to={paths.main} className={styles.logoWrapper} state={{from: location}}>
           <Logo />
         </Link>
 

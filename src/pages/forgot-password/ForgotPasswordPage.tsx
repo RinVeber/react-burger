@@ -3,7 +3,7 @@ import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../services/store";
 import { paths } from "../../router/paths";
@@ -13,6 +13,7 @@ export function ForgotPasswordPage() {
   const [emailValue, setEmailValue] = React.useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation()
 
   const { forgotPassMessage, forgotPassSuccess } = useAppSelector(
     (store) => store.auth,
@@ -50,7 +51,7 @@ export function ForgotPasswordPage() {
       <div className={styles.actions}>
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?&nbsp;
-          <Link to={paths.login} className={styles.actions__link}>
+          <Link to={paths.login} className={styles.actions__link} state={{from: location}}>
             Войти
           </Link>
         </p>

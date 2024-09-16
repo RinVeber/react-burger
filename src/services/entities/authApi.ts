@@ -12,7 +12,7 @@ export interface RegisterResponse {
   accessToken: string;
   refreshToken: string;
   success: boolean;
-  userInfo: IUserInfo;
+  user: IUserInfo;
 }
 
 export const authApi = createApi({

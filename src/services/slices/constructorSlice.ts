@@ -98,6 +98,7 @@ export const constructorSlice = createSlice({
       })
       .addCase(sendOrderAction.rejected, (state, action) => {
         state.errorMessage = action.payload;
+        state.orderDetails = null;
         state.success = false;
         state.status = "error";
       });

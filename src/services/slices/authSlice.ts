@@ -61,8 +61,8 @@ export const authSlice = createSlice({
   initialState: constructorState,
   reducers: {
     setUserAction: (state, action: PayloadAction<RegisterResponse>) => {
-      const { userInfo, accessToken, refreshToken, success } = action.payload;
-      state.userInfo = userInfo;
+      const { user, accessToken, refreshToken, success } = action.payload;
+      state.userInfo = user;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
       state.success = success;

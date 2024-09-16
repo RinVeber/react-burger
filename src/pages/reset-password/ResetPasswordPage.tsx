@@ -6,7 +6,7 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../services/store";
 import { paths } from "../../router/paths";
 import { sendResetPassRequestAction } from "../../services/actions/actions";
@@ -15,6 +15,7 @@ export function ResetPasswordPage() {
   const { forgotPassSuccess, resetPassMessage } = useAppSelector(
     (store) => store.auth,
   );
+  const location = useLocation()
   const [codeValue, setCodeValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const dispatch = useAppDispatch();
@@ -62,7 +63,7 @@ export function ResetPasswordPage() {
       <div className={styles.actions}>
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?&nbsp;
-          <Link to={paths.login} className={styles.actions__link}>
+          <Link to={paths.login} className={styles.actions__link}  state={{from: location}}>
             Войти
           </Link>
         </p>

@@ -9,7 +9,7 @@ import {ResetPasswordPage} from '../pages/reset-password/ResetPasswordPage';
 import {ProfilePage} from '../pages/profile/ProfilePage';
 import {UserContent} from '../pages/profile/componets/user-content/UserContent';
 import {OrderHistory} from '../pages/profile/componets/orders-history/OrdersHistory';
-import {ProtectedRouteElement} from './ProtectedRouteElement';
+import {loaderSendUserInfo, ProtectedRouteElement} from './ProtectedRouteElement';
 import {IngredientPage} from '../pages/ingredient/IngredientPage';
 import ModalSwitch from '../componets/ModalSwitch/ModalSwitch';
 
@@ -17,11 +17,12 @@ export const router = createBrowserRouter([
   {
     path: paths.main,
     element: <App />,
-    loader: loaderIngredientsFull,
+    loader: loaderSendUserInfo,
     children: [
       {
         path: paths.main,
         element: <MainLayout />,
+        loader: loaderIngredientsFull,
       },
 
       {
