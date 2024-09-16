@@ -76,7 +76,7 @@ export const constructorSlice = createSlice({
 
     sortIngredientsAction: (state, action) => {
       const { dragIndex, hoverIndex, componentsArray } = action.payload;
-      const newArray = componentsArray;
+      const newArray = [...componentsArray]
       const dragItem = componentsArray[dragIndex];
       const hoverItem = componentsArray[hoverIndex];
       newArray[dragIndex] = hoverItem;

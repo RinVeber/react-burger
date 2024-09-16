@@ -19,79 +19,75 @@ interface Props {
   moveListItem?: (dragIndex: number, hoverIndex: number) => void;
 }
 
-const BurgerItem = forwardRef<HTMLLIElement, Props>(
-  (
-    {item, position, isVisibility, index, moveListItem},
-    ref: React.Ref<HTMLLIElement>,
-  ) => {
-    const dispatch = useAppDispatch();
+export default function BurgerItem({
+  item,
+  position,
+  isVisibility,
+  index,
+  moveListItem,
+}: Props) {
+  const dispatch = useAppDispatch();
 
-    const handleRemoveBtn = () => {
-      dispatch(removeIngredientAction(item));
-    };
+  const handleRemoveBtn = () => {
+    dispatch(removeIngredientAction(item));
+  };
 
-    const [{isDrag}, drag] = useDrag({
-      type: 'item',
-      item: {index},
-      collect: (monitor) => ({
-        isDrag: monitor.isDragging(),
-      }),
-    });
+  const [{isDrag}, drag] = useDrag({
+    type: 'item',
+    item: {index},
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
 
-    const refElement = React.useRef<HTMLLIElement>(null);
+  const refElement = React.useRef<HTMLLIElement>(null);
 
-    const [, drop] = useDrop({
-      accept: 'item',
-      hover: (item: {index: number}, monitor) => {
-        const dragIndex = item.index;
-        const hoverIndex = index!;
-        const hoverBoundingRect = refElement.current?.getBoundingClientRect();
+  const [, drop] = useDrop({
+    accept: 'item',
+    hover: (item: {index: number}, monitor) => {
+      const dragIndex = item.index;
+      const hoverIndex = index!;
+      const hoverBoundingRect = refElement.current?.getBoundingClientRect();
 
-        const hoverMiddleY =
-          (hoverBoundingRect!.bottom - hoverBoundingRect!.top) / 2;
-        const hoverActualY =
-          monitor.getClientOffset()!.y - hoverBoundingRect!.top;
+      const hoverMiddleY =
+        (hoverBoundingRect!.bottom - hoverBoundingRect!.top) / 2;
+      const hoverActualY =
+        monitor.getClientOffset()!.y - hoverBoundingRect!.top;
 
-        if (dragIndex < hoverIndex! && hoverActualY < hoverMiddleY) return;
-        if (dragIndex > hoverIndex! && hoverActualY > hoverMiddleY) return;
-        moveListItem?.(dragIndex, hoverIndex);
-        item.index = hoverIndex;
-      },
-    });
+      if (dragIndex < hoverIndex! && hoverActualY < hoverMiddleY) return;
+      if (dragIndex > hoverIndex! && hoverActualY > hoverMiddleY) return;
+      moveListItem?.(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
 
-    drag(drop(refElement));
+  drag(drop(refElement));
 
-    return (
-      <li
-        className={style.item}
-        {...(item.type !== TabStatus.buns && {ref: refElement})}
-        style={isDrag ? {opacity: 0.5} : {opacity: 1}}
-        ref={ref}
+  return (
+    <li
+      className={style.item}
+      {...(item.type !== TabStatus.buns && {ref: refElement})}
+      style={isDrag ? {opacity: 0.5} : {opacity: 1}}
+    >
+      <div
+        className={`${
+          isVisibility ? style.dragIcon_visible : style.dragIcon_hidden
+        } mr-2`}
       >
-        <div
-          className={`${
-            isVisibility ? style.dragIcon_visible : style.dragIcon_hidden
-          } mr-2`}
-        >
-          <DragIcon type="primary" />
-        </div>
-        <ConstructorElement
-          handleClose={handleRemoveBtn}
-          type={position}
-          isLocked={position === 'top' || position === 'bottom'}
-          text={
-            item.name +
-            (position === 'top' ? ' (верх)' : '') +
-            (position === 'bottom' ? ' (низ)' : '')
-          }
-          price={item.price}
-          thumbnail={item.image}
-        />
-      </li>
-    );
-  },
-);
-
-BurgerItem.displayName = 'BurgerItem';
-
-export default BurgerItem;
+        <DragIcon type="primary" />
+      </div>
+      <ConstructorElement
+        handleClose={() => handleRemoveBtn()}
+        type={position}
+        isLocked={position === 'top' || position === 'bottom'}
+        text={
+          item.name +
+          (position === 'top' ? ' (верх)' : '') +
+          (position === 'bottom' ? ' (низ)' : '')
+        }
+        price={item.price}
+        thumbnail={item.image}
+      />
+    </li>
+  );
+}
