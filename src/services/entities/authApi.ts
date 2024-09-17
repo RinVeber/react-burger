@@ -35,6 +35,8 @@ export const authApi = createApi({
         if (response.success) {
           setCookie("accessToken", response.accessToken);
           setCookie("refreshToken", response.refreshToken);
+        } else {
+        
         }
         return response;
       },
