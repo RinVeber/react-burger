@@ -1,5 +1,4 @@
-import {loaderIngredientsFull} from '../../../componets/app/app';
-
+import { loaderIngredientsFull } from '../../../componets/main-layout/main-layout';
 import mockData from '../../data.json';
 
 describe('Fetch Tests', () => {

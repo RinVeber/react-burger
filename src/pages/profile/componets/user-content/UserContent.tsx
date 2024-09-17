@@ -30,7 +30,7 @@ export function UserContent() {
 
   React.useEffect(() => {
     userInfo && setValues(userInfo);
-  }, [userInfo, setValues]);
+  }, [userInfo]);
 
   const onNameEditIconClick = (e: React.MouseEvent) => {
     setProfileEditing(true);
@@ -98,6 +98,7 @@ export function UserContent() {
         disabled={nameFieldState}
       />
       <Input
+        type={'email'}
         onChange={(e) => handleChange(e)}
         value={values.email}
         name={"email"}
@@ -107,11 +108,12 @@ export function UserContent() {
         onIconClick={onEmailIconClick}
         ref={emailRef}
         disabled={emailFieldState}
+      
       />
       <Input
         type="password"
         onChange={(e) => handleChange(e)}
-        value={values.password!}
+        value={values.password || ''}
         name={"password"}
         errorText={"Ошибка. Введите другой пароль"}
         icon={"EditIcon"}

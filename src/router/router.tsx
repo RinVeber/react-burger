@@ -1,6 +1,6 @@
 import {createBrowserRouter, useLocation} from 'react-router-dom';
-import {App, loaderIngredientsFull} from '../componets/app/app';
-import MainLayout from '../componets/main-layout/main-layout';
+import {App} from '../componets/app/app';
+import MainLayout, { loaderIngredientsFull } from '../componets/main-layout/main-layout';
 import {paths} from './paths';
 import RegisterPage from '../pages/register/RegisterPage';
 import {LoginPage} from '../pages/login/LoginPage';
@@ -27,6 +27,7 @@ export const router = createBrowserRouter([
 
       {
         path: paths.ingredients,
+        loader: loaderIngredientsFull,
         element: <ModalSwitch component={<IngredientPage />} />,
       },
 
