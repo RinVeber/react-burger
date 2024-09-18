@@ -8,7 +8,12 @@ interface Props {
   id: string;
 }
 
-export default function IngredientCategory({ title, children, refTab, id }: Props) {
+export default function IngredientCategory({
+  title,
+  children,
+  refTab,
+  id,
+}: Props) {
   return (
     <div ref={refTab} className={`${style.row} row mt-10`} id={id}>
       <h3 className={`text text_type_main-medium`}>{title}</h3>

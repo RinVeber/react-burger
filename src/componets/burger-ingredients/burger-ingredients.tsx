@@ -19,7 +19,7 @@ export enum TabStatus {
 export default function BurgerIngredients() {
   const dispatch = useAppDispatch();
   const { selectedIngredient, ingredientsCurrentTab, isModal } = useAppSelector(
-    (store) => store.data
+    (store) => store.data,
   );
 
   const bunsRef = React.useRef<HTMLDivElement>(null);
@@ -52,9 +52,6 @@ export default function BurgerIngredients() {
     }
   };
 
-  const closeIngredientPop = () => {
-    dispatch(removeCurrentIngredientAction());
-  };
 
   return (
     <React.Fragment>
@@ -92,11 +89,6 @@ export default function BurgerIngredients() {
           mainsRef={mainsRef}
         />
       </div>
-      {selectedIngredient && isModal && (
-        <Modal header="Детали ингредиента" onClose={closeIngredientPop}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </React.Fragment>
   );
 }

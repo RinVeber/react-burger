@@ -12,13 +12,18 @@ import { useLoginMutation } from "../../services/entities/authApi";
 import { setUserAction } from "../../services/slices/authSlice";
 import { useForm } from "../../utils/hooks/useForm";
 
+interface FormProps {
+  password: string;
+  email: string;
+}
+
 export function LoginPage() {
   const { loginFail, isLoginSuccess } = useAppSelector((store) => store.auth);
-
-  const {values, handleChange} = useForm({
-    password: '',
-    email: '',
-  })
+const location = useLocation()
+  const { values, handleChange } = useForm<FormProps>({
+    password: "",
+    email: "",
+  });
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -35,11 +40,11 @@ export function LoginPage() {
         if (response.success) {
           dispatch(
             setUserAction({
-              userInfo: response.userInfo,
+              user: response.user,
               accessToken: response.accessToken,
               refreshToken: response.refreshToken,
               success: response.success,
-            })
+            }),
           );
         }
       } catch (error) {
@@ -47,7 +52,6 @@ export function LoginPage() {
       }
     }
   };
-  
 
   React.useEffect(() => {
     if (isLoginSuccess) {
@@ -64,7 +68,7 @@ export function LoginPage() {
           value={values.email}
           name={"email"}
           isIcon={false}
-          errorText={'Введена не корректная почта'}
+          // errorText={"Введена не корректная почта."}
         />
         <PasswordInput
           onChange={(e) => handleChange(e)}
@@ -83,13 +87,13 @@ export function LoginPage() {
       <div className={styles.actions}>
         <p className="text text_type_main-default text_color_inactive">
           Вы — новый пользователь?&nbsp;
-          <Link to={paths.register} className={styles.actions__link}>
+          <Link to={paths.register} className={styles.actions__link} state={{from: location}} >
             Зарегистрироваться
           </Link>
         </p>
         <p className="text text_type_main-default text_color_inactive">
           Забыли пароль?&nbsp;
-          <Link to="/forgot-password" className={styles.actions__link}>
+          <Link to="/forgot-password" className={styles.actions__link}  state={{from: location}}>
             Восстановить пароль
           </Link>
         </p>

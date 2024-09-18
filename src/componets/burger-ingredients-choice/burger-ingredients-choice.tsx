@@ -14,13 +14,13 @@ function BurgerIngredientsChoice() {
   const dispatch = useAppDispatch();
   const { ingredients } = useAppSelector((store) => store.data);
   const { selectedIngredients, selectedBun } = useAppSelector(
-    (store) => store.burgerConstructor
+    (store) => store.burgerConstructor,
   );
 
   const [_, drop] = useDrop({
     accept: "ingredient",
     collect: (
-      monitor: DropTargetMonitor<{ openId: string; type: string }, unknown>
+      monitor: DropTargetMonitor<{ openId: string; type: string }, unknown>,
     ) => ({
       isHover: monitor.isOver(),
     }),
@@ -40,10 +40,10 @@ function BurgerIngredientsChoice() {
           componentsArray: [...selectedIngredients],
           dragIndex: dragIndex,
           hoverIndex: hoverIndex,
-        })
+        }),
       );
     },
-    [dispatch, selectedIngredients]
+    [dispatch, selectedIngredients],
   );
 
   return (

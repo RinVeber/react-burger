@@ -1,8 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import store, { useAppDispatch, useAppSelector } from "../services/store";
-import { sendUserInfoRequestAction } from "../services/actions/actions";
-import React from "react";
-import { paths } from "./paths";
+import {Navigate, useLocation, useNavigate} from 'react-router-dom';
+import store, {useAppDispatch, useAppSelector} from '../services/store';
+import {sendUserInfoRequestAction} from '../services/actions/actions';
+import React from 'react';
+import {paths} from './paths';
 
 interface Props {
   isAuth: boolean;
@@ -24,24 +24,25 @@ export function ProtectedRouteElement({
   const dispatch = useAppDispatch();
   const userInfoSuccess = useAppSelector((store) => store.auth.userInfoSuccess);
   const isUserInfoLoading = useAppSelector(
-    (store) => store.auth.isUserInfoLoading
+    (store) => store.auth.isUserInfoLoading,
   );
 
+  const from = location.state?.from || '/';
   React.useEffect(() => {
     if (!userInfoSuccess) {
       dispatch(sendUserInfoRequestAction());
     }
   }, [userInfoSuccess]);
 
-  React.useEffect(() => {
-    if (isAuth && userInfoSuccess === false) {
-      navigate(paths.login, { replace: true, state: { from: location } });
-    }
+  if (userInfoSuccess && isNotForAuthorized) {
+    return <Navigate to={from} />;
+  }
 
-    if (isNotForAuthorized && isAuth) {
-      navigate(-1);
-    }
-  }, [isAuth, userInfoSuccess, isNotForAuthorized, navigate, location]);
+  if (isAuth && userInfoSuccess === false) {
+    return (
+      <Navigate to={paths.login} replace={true} state={{from: location}} />
+    );
+  }
 
   if (isUserInfoLoading) {
     return <div>Loading...</div>;

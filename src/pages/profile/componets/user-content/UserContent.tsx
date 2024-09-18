@@ -12,13 +12,12 @@ import { getUserInfo } from "../../../../services/slices/authSlice";
 
 export function UserContent() {
   const userInfo = useAppSelector(getUserInfo);
-
   const dispatch = useAppDispatch();
-  const {values, setValues, handleChange} = useForm<IUserInfo>({
-    name: '',
-    email: '',
-    password: ''
-  })
+  const { values, setValues, handleChange } = useForm<IUserInfo>({
+    name: "",
+    email: "",
+    password: "",
+  });
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passRef = React.useRef<HTMLInputElement>(null);
@@ -31,7 +30,7 @@ export function UserContent() {
 
   React.useEffect(() => {
     userInfo && setValues(userInfo);
-  }, [userInfo, setValues]);
+  }, [userInfo]);
 
   const onNameEditIconClick = (e: React.MouseEvent) => {
     setProfileEditing(true);
@@ -64,7 +63,7 @@ export function UserContent() {
         name: values.name,
         email: values.email,
         password: values.password,
-      })
+      }),
     );
     stopEditoring();
   };
@@ -83,7 +82,6 @@ export function UserContent() {
     setEmailFieldState(true);
   };
 
-
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <Input
@@ -100,7 +98,8 @@ export function UserContent() {
         disabled={nameFieldState}
       />
       <Input
-        onChange={(e) =>handleChange(e)}
+        type={'email'}
+        onChange={(e) => handleChange(e)}
         value={values.email}
         name={"email"}
         errorText={"Ошибка. проверьте правильность почты"}
@@ -109,11 +108,12 @@ export function UserContent() {
         onIconClick={onEmailIconClick}
         ref={emailRef}
         disabled={emailFieldState}
+      
       />
       <Input
         type="password"
         onChange={(e) => handleChange(e)}
-        value={values.password!}
+        value={values.password || ''}
         name={"password"}
         errorText={"Ошибка. Введите другой пароль"}
         icon={"EditIcon"}

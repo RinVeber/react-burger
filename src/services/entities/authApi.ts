@@ -5,14 +5,14 @@ import { getCookie, setCookie } from "../../utils/helper-function/cockie";
 export interface IUserInfo {
   name: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export interface RegisterResponse {
   accessToken: string;
   refreshToken: string;
   success: boolean;
-  userInfo: IUserInfo
+  user: IUserInfo;
 }
 
 export const authApi = createApi({
@@ -35,6 +35,8 @@ export const authApi = createApi({
         if (response.success) {
           setCookie("accessToken", response.accessToken);
           setCookie("refreshToken", response.refreshToken);
+        } else {
+        
         }
         return response;
       },

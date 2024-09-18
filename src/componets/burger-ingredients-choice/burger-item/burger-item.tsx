@@ -1,19 +1,19 @@
+import React, {forwardRef} from 'react';
 import {
   ConstructorElement,
   DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import style from "./style.module.scss";
-import { IDataItem } from "../../../utils/data";
-import { useAppDispatch } from "../../../services/store";
-import { removeIngredientAction } from "../../../services/slices/constructorSlice";
-import { useDrag, useDrop } from "react-dnd";
-import React from "react";
-import { DefaultBun } from "../helper";
-import { TabStatus } from "../../burger-ingredients/burger-ingredients";
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import style from './style.module.scss';
+import {IDataItem} from '../../../utils/data';
+import {useAppDispatch} from '../../../services/store';
+import {removeIngredientAction} from '../../../services/slices/constructorSlice';
+import {useDrag, useDrop} from 'react-dnd';
+import {DefaultBun} from '../helper';
+import {TabStatus} from '../../burger-ingredients/burger-ingredients';
 
 interface Props {
   item: IDataItem | DefaultBun;
-  position?: "top" | "bottom";
+  position?: 'top' | 'bottom';
   isVisibility: boolean;
   index?: number;
   moveListItem?: (dragIndex: number, hoverIndex: number) => void;
@@ -32,22 +32,22 @@ export default function BurgerItem({
     dispatch(removeIngredientAction(item));
   };
 
-  const [{ isDrag }, drag] = useDrag({
-    type: "item",
-    item: { index },
+  const [{isDrag}, drag] = useDrag({
+    type: 'item',
+    item: {index},
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
   });
 
-  const ref = React.useRef<HTMLLIElement>(null);
+  const refElement = React.useRef<HTMLLIElement>(null);
 
   const [, drop] = useDrop({
-    accept: "item",
-    hover: (item: { index: number }, monitor) => {
+    accept: 'item',
+    hover: (item: {index: number}, monitor) => {
       const dragIndex = item.index;
       const hoverIndex = index!;
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverBoundingRect = refElement.current?.getBoundingClientRect();
 
       const hoverMiddleY =
         (hoverBoundingRect!.bottom - hoverBoundingRect!.top) / 2;
@@ -60,13 +60,14 @@ export default function BurgerItem({
       item.index = hoverIndex;
     },
   });
-  const dragDropRef = drag(drop(ref)) as any;
+
+  drag(drop(refElement));
 
   return (
     <li
       className={style.item}
-      {...(item.type !== TabStatus.buns && { ref: dragDropRef })}
-      style={isDrag ? { opacity: 0.5 } : { opacity: 1 }}
+      {...(item.type !== TabStatus.buns && {ref: refElement})}
+      style={isDrag ? {opacity: 0.5} : {opacity: 1}}
     >
       <div
         className={`${
@@ -76,13 +77,13 @@ export default function BurgerItem({
         <DragIcon type="primary" />
       </div>
       <ConstructorElement
-        handleClose={handleRemoveBtn}
+        handleClose={() => handleRemoveBtn()}
         type={position}
-        isLocked={position === "top" || position === "bottom"}
+        isLocked={position === 'top' || position === 'bottom'}
         text={
           item.name +
-          (position === "top" ? " (верх)" : "") +
-          (position === "bottom" ? " (низ)" : "")
+          (position === 'top' ? ' (верх)' : '') +
+          (position === 'bottom' ? ' (низ)' : '')
         }
         price={item.price}
         thumbnail={item.image}

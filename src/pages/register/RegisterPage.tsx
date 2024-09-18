@@ -6,7 +6,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import { paths } from "../../router/paths";
 import { useRegisterMutation } from "../../services/entities/authApi";
 
@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [nameValue, setNameValue] = React.useState("");
   const [emailValue, setEmailValue] = React.useState("");
   const [passwordValue, setPasswordValue] = React.useState("");
+  const location = useLocation()
 
   const [registerUser, _] = useRegisterMutation();
 
@@ -45,7 +46,7 @@ export default function RegisterPage() {
           value={emailValue}
           name={"email"}
           isIcon={false}
-          errorText={"Проверьте правильность почты"}
+          // errorText={"Проверьте правильность почты"}
         />
         <PasswordInput
           onChange={(e) => setPasswordValue(e.target.value)}
@@ -60,7 +61,7 @@ export default function RegisterPage() {
       <div className={styles.actions}>
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегситрированы?&nbsp;
-          <Link to={paths.login} className={styles.actions__link}>
+          <Link to={paths.login} className={styles.actions__link}  state={{from: location}}>
             Войти
           </Link>
         </p>

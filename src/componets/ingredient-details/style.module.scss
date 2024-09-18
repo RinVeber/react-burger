@@ -1,25 +1,24 @@
 .figure {
-    width: 520px;
-    height: 240px;
-  }
-  .image {
-    display: block;
-    margin: 0 auto;
-    height: 100%;
-  }
-  
-  .list {
-    display: flex;
-    flex-direction: row;
-    column-gap: 20px;
-    justify-content: space-between;
-    list-style: none;
-    margin-top: 0;
-    padding-left: 0;
-  }
+  width: 520px;
+  height: 240px;
+}
+.image {
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+}
 
-  .item {
-    min-width: 112px;
-    text-align: center;
-  }
-  
+.list {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  justify-content: space-between;
+  list-style: none;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.item {
+  min-width: 112px;
+  text-align: center;
+}

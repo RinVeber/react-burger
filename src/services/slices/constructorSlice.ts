@@ -51,7 +51,7 @@ export const constructorSlice = createSlice({
         } else {
           state.selectedIngredients = [
             action.payload,
-            ...state.selectedIngredients
+            ...state.selectedIngredients,
           ];
         }
       },
@@ -62,7 +62,7 @@ export const constructorSlice = createSlice({
 
     removeIngredientAction: (state, action) => {
       const indexToRemove = state.selectedIngredients.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item._id === action.payload._id,
       );
       if (indexToRemove !== -1) {
         state.selectedIngredients.splice(indexToRemove, 1);
@@ -76,7 +76,7 @@ export const constructorSlice = createSlice({
 
     sortIngredientsAction: (state, action) => {
       const { dragIndex, hoverIndex, componentsArray } = action.payload;
-      const newArray = componentsArray;
+      const newArray = [...componentsArray]
       const dragItem = componentsArray[dragIndex];
       const hoverItem = componentsArray[hoverIndex];
       newArray[dragIndex] = hoverItem;
@@ -98,6 +98,7 @@ export const constructorSlice = createSlice({
       })
       .addCase(sendOrderAction.rejected, (state, action) => {
         state.errorMessage = action.payload;
+        state.orderDetails = null;
         state.success = false;
         state.status = "error";
       });

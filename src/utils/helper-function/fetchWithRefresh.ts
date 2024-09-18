@@ -18,7 +18,7 @@ export interface RequestInitWithAuth extends RequestInit {
 
 export const fetchWithRefresh = async (
   url: RequestInfo | URL,
-  options: RequestInitWithAuth
+  options: RequestInitWithAuth,
 ) => {
   try {
     const res = await request(url, options);
@@ -40,7 +40,7 @@ export const fetchWithRefresh = async (
         ...options.headers,
         authorization: refreshData.accessToken,
       };
-     const res = await request(url, { ...options, headers: newHeaders });
+      const res = await request(url, { ...options, headers: newHeaders });
       return res;
     } else {
       return Promise.reject(err);

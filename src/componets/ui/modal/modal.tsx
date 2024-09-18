@@ -7,7 +7,7 @@ import { ModalOverlay } from "./modal-overlay/modal-overlay";
 interface PropsModal {
   children?: ReactNode;
   header?: ReactNode;
-  onClose: (e?: any) => void;
+  onClose?: () => void;
 }
 
 const modalRoot = document.getElementById("modalRoot") as
@@ -18,7 +18,7 @@ function Modal({ children, header, onClose }: PropsModal) {
   useEffect(() => {
     const keyClose = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
-        onClose();
+        onClose?.();
       }
     };
     document.addEventListener("keydown", keyClose);
@@ -26,7 +26,6 @@ function Modal({ children, header, onClose }: PropsModal) {
       document.removeEventListener("keydown", keyClose);
     };
   }, [onClose]);
-
 
   return ReactDOM.createPortal(
     <React.Fragment>
@@ -36,10 +35,8 @@ function Modal({ children, header, onClose }: PropsModal) {
       </div>
       <ModalOverlay close={onClose} />
     </React.Fragment>,
-    modalRoot
+    modalRoot,
   );
 }
-
-
 
 export default Modal;

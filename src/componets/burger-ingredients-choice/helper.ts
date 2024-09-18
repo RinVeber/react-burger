@@ -22,7 +22,7 @@ export const getRandom = () => {
 
 export const findElement = (
   target: { openId: string; type: string },
-  items: IDataItem[]
+  items: IDataItem[],
 ) => {
   return items.find((item: IDataItem) => item._id === target.openId);
 };

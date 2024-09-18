@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react';
+import React, {Component, ReactNode} from 'react';
 import styles from './style.module.scss';
 
 const textError = 'Похоже у нас что то сломалось :(';
@@ -16,11 +16,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   };
 
   componentDidCatch() {
-    this.setState({ hasError: true });
+    this.setState({hasError: true});
   }
 
   render() {
-    const { children } = this.props;
+    const {children} = this.props;
     return this.state.hasError ? (
       <div className={styles['error-boundary']}>{textError}</div>
     ) : (
