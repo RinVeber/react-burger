@@ -1,0 +1,76 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+  }
+  
+  .ordernum {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .ingredients {
+    list-style: none;
+    max-height: 312px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    margin-top: 0;
+    padding: 0;
+  }
+  
+  .orderfooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 16px;
+  }
+  
+  .pricebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 8px;
+    margin-left: auto;
+  }
+  
+  .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 8px;
+    margin-right: 24px;
+  }
+  .ingrname {
+    max-width: 320px;
+  }
+  .iconbox {
+    width: 64px;
+    height: 64px;
+    border-radius: 100px;
+    background-color: #131316;
+    border-color: #4c4cff;
+    border-width: 2px;
+    box-sizing: border-box;
+    border-style: solid;
+  }
+  
+  .status_done {
+    color: #00cccc;
+  }
+  
+  .status_cancelled {
+    color: red;
+  }
+  
+  .ingricon {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.5);
+  }
+  

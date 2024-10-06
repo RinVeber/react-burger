@@ -6,6 +6,7 @@ import {getCookie, setCookie} from '../../utils/helper-function/cockie';
 import {fetchWithRefresh} from '../../utils/helper-function/fetchWithRefresh';
 import {IUserInfo} from '../entities/authApi';
 import {IDataItem} from '../../utils/data';
+import {IFetchOrderResponse} from '../slices/wsOrderSlice';
 
 export interface ServerResponse {
   success: boolean;
@@ -140,3 +141,19 @@ export const sendUserInfoRequestAction = createAsyncThunk<
 
   return response;
 });
+
+export const getOrderDataAction = createAsyncThunk<
+IFetchOrderResponse,
+  {number: string}
+>(
+  'order/getOrderDataAction',
+  async ({number}: {number: string}, {dispatch, rejectWithValue}) => {
+    const response = await request(`/orders/${number}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response;
+  },
+);

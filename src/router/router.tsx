@@ -1,6 +1,8 @@
 import {createBrowserRouter, useLocation} from 'react-router-dom';
 import {App} from '../componets/app/app';
-import MainLayout, { loaderIngredientsFull } from '../componets/main-layout/main-layout';
+import MainLayout, {
+  loaderIngredientsFull,
+} from '../componets/main-layout/main-layout';
 import {paths} from './paths';
 import RegisterPage from '../pages/register/RegisterPage';
 import {LoginPage} from '../pages/login/LoginPage';
@@ -9,9 +11,16 @@ import {ResetPasswordPage} from '../pages/reset-password/ResetPasswordPage';
 import {ProfilePage} from '../pages/profile/ProfilePage';
 import {UserContent} from '../pages/profile/componets/user-content/UserContent';
 import {OrderHistory} from '../pages/profile/componets/orders-history/OrdersHistory';
-import {loaderSendUserInfo, ProtectedRouteElement} from './ProtectedRouteElement';
+import {
+  loaderSendUserInfo,
+  ProtectedRouteElement,
+} from './ProtectedRouteElement';
 import {IngredientPage} from '../pages/ingredient/IngredientPage';
 import ModalSwitch from '../componets/ModalSwitch/ModalSwitch';
+import FeedOrderPage from '../pages/feed/FeedOrderPage';
+import {FeedPage} from '../pages/feed/FeedPage';
+import ModalSwitchFeedPage from '../componets/ModalSwitch/ModalSwitchFeedPage';
+import ModalSwitchOrderHistoryPage from '../componets/ModalSwitch/ModalSwitchOrderHistoryPage';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +82,7 @@ export const router = createBrowserRouter([
       },
       {
         path: paths.profile,
+        loader: loaderIngredientsFull,
         element: (
           <ProtectedRouteElement
             isAuth={true}
@@ -91,6 +101,23 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        loader: loaderIngredientsFull,
+        path: '/profile/orders/:id',
+        element: <ModalSwitchOrderHistoryPage component={<FeedOrderPage />} />,
+      },
+      {path: paths.feed, element: <FeedPage />, loader: loaderIngredientsFull},
+      {
+        path: paths.feedOrder,
+        element: <ModalSwitchFeedPage component={<FeedOrderPage />} />,
+        loader: loaderIngredientsFull,
+      },
+
+      // {
+      //   loader: loaderIngredientsFull,
+      //   path: '/profile/orders/:id',
+      //   element: <ModalSwitchOrderHistoryPage component={<FeedOrderPage />} />,
+      // },
     ],
   },
 ]);

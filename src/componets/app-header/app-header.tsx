@@ -44,10 +44,10 @@ function AppHeader() {
           </li>
           <li className={`${styles.navigationLink} p-5`}>
             <NavLink
-              className={setLinkStyle(paths.orderHistory)}
-              to={paths.orderHistory}
+              className={setLinkStyle(paths.feed)}
+              to={paths.feed}
             >
-              <ListIcon type={setIconType(paths.orderHistory)} />
+              <ListIcon type={setIconType(paths.feed)} />
               <span
                 className={`${styles.navigationText} text text_type_main-default ml-2`}
               >

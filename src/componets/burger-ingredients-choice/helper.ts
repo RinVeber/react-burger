@@ -16,8 +16,7 @@ export const DefaultBun: DefaultBun = {
 };
 
 export const getRandom = () => {
-  const timetamp = new Date().getTime();
-  return `${timetamp}`;
+  return `${Math.floor(Math.random() * 999)}`;
 };
 
 export const findElement = (

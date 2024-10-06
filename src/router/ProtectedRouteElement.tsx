@@ -3,6 +3,7 @@ import store, {useAppDispatch, useAppSelector} from '../services/store';
 import {sendUserInfoRequestAction} from '../services/actions/actions';
 import React from 'react';
 import {paths} from './paths';
+import { Preloader } from '../componets/Preloader/Preloader';
 
 interface Props {
   isAuth: boolean;
@@ -45,7 +46,7 @@ export function ProtectedRouteElement({
   }
 
   if (isUserInfoLoading) {
-    return <div>Loading...</div>;
+    return <Preloader />
   }
 
   return page;
