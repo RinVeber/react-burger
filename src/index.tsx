@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, useLocation } from "react-router-dom";
-import { router } from "./router/router";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./utils/error-boundary/error-boundary";
 import { Provider } from "react-redux";
@@ -20,7 +18,6 @@ root.render(
         <BrowserRouter>
           <AppRouter />
         </BrowserRouter>
-        {/* <RouterProvider router={router}  /> */}
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
