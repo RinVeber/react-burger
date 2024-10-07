@@ -3,18 +3,22 @@ import styles from './style.module.scss';
 import {useAppSelector} from '../../../../services/store';
 import OrderCard from '../../../../componets/OrderCard/OrderCard';
 import FeedOrderPage from '../../../feed/FeedOrderPage';
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
+import {Preloader} from '../../../../componets/Preloader/Preloader';
 
 interface Props {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 export function OrderHistory({children}: Props) {
   const location = useLocation();
-  const selectedIngredient = useAppSelector((state) => state.order.selectedIngredient)
   const state = location.state;
   const items = useAppSelector((store) => store.data.ingredients);
   const orders = useAppSelector((store) => store.socket.orders);
+
+  if (!orders) {
+    return <Preloader />;
+  }
 
   const sortedOrders = orders
     ? [...orders].sort((a, b) => {
@@ -25,14 +29,15 @@ export function OrderHistory({children}: Props) {
       })
     : [];
 
-
   const getOrdersMap = sortedOrders.map((order, index) => {
-    const ingredientsPictures = order.ingredients.map(
-      (ingredient) =>
-      { 
-        
-        return items.filter((storeItem) => storeItem._id === ingredient)[0].image }
-    );
+    const ingredientsPictures = order.ingredients.map((ingredient) => {
+      return {
+        image: items.filter((storeItem) => storeItem._id === ingredient)[0]
+          .image,
+        _id: ingredient,
+      };
+    });
+
     const totalPrice = order.ingredients
       .map(
         (ingredient) =>
@@ -41,7 +46,6 @@ export function OrderHistory({children}: Props) {
       .reduce((acc, current) => {
         return acc + current;
       }, 0);
-
 
     return (
       <OrderCard
@@ -57,8 +61,6 @@ export function OrderHistory({children}: Props) {
       />
     );
   });
-
-
 
   return (
     <section className={styles.main}>

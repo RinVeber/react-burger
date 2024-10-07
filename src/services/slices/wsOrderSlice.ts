@@ -114,7 +114,7 @@ export const wsOrderSlice = createSlice({
       .addCase(OrderWsOnMessage, (state, action) => {
         state.status = 'init';
 
-        if (action.payload.orders.length) {
+        if (action.payload.orders && action.payload.orders.length) {
           state.orders = action.payload.orders;
           state.isSuccess = true;
         } else {

@@ -1,6 +1,6 @@
 import React from 'react';
-import {useAppDispatch, useAppSelector} from '../../services/store';
-import {useParams} from 'react-router-dom';
+import store, {useAppDispatch, useAppSelector} from '../../services/store';
+import {useLocation, useParams} from 'react-router-dom';
 import {getOrderDataAction} from '../../services/actions/actions';
 import {getStatusText, IDataItem, ORDER_STATUSES} from '../../utils/data';
 import styles from './styles.module.scss';
@@ -8,7 +8,7 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Preloader } from '../Preloader/Preloader';
+import {Preloader} from '../Preloader/Preloader';
 
 export function getUniqArrayItems(arr: (IDataItem | undefined)[]) {
   return Array.from(new Set(arr));
@@ -36,13 +36,13 @@ export default function FeedOrderInfo() {
     }
   }, [orders, dispatch, orderNum]);
 
-
   const openedOrderData = orders.length > 0
-    ? orders.find((order) => { 
-        return `${order.number}` === `${orderNum.id}`})
-    : currentOrderDetails;
+      ? orders.find((order) => {
+          return `${order.number}` === `${orderNum.id}`;
+        })
+      : currentOrderDetails;
+  
 
-    console.log('openedOrderData', openedOrderData)
 
   const orderIngredients = openedOrderData?.ingredients.map((ingredient) =>
     items.find((storeItem) => storeItem._id === ingredient),
@@ -52,7 +52,6 @@ export default function FeedOrderInfo() {
     0,
   );
 
-
   const statusText = getStatusText(openedOrderData?.status);
 
   const statusStyles = {
@@ -61,9 +60,9 @@ export default function FeedOrderInfo() {
     cancelled: `${styles.status} text text_type_main-small mb-15 ${styles.status_cancelled}`,
   };
 
-  if (!orderIngredients) {
-    return <Preloader />
-  }
+  // if (!orderIngredients) {
+  //   return <Preloader />
+  // }
 
   return openedOrderData ? (
     <div className={styles.container}>

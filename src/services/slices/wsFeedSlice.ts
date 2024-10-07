@@ -80,7 +80,6 @@ export const wsFeedSlice = createSlice({
         state.status = 'closed';
         state.wasClean = action.payload.wasClean;
       })
-      // receive messages
       .addCase(FeedWsOnMessage, (state, action) => {
         if (WS_DEBUG) {
           console.log('feedReducer:wsOnMessage', action.payload);
@@ -88,7 +87,7 @@ export const wsFeedSlice = createSlice({
 
         state.status = 'init';
 
-        if (action.payload.orders.length) {
+        if (action.payload.orders && action.payload.orders.length) {
           state.orders = action.payload.orders;
           state.isSuccess = true;
         } else {

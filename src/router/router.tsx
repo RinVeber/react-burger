@@ -40,67 +40,67 @@ export const router = createBrowserRouter([
         element: <ModalSwitch component={<IngredientPage />} />,
       },
 
-      {
-        path: paths.register,
-        element: (
-          <ProtectedRouteElement
-            isAuth={false}
-            page={<RegisterPage />}
-            isNotForAuthorized={true}
-          />
-        ),
-      },
-      {
-        path: paths.login,
-        element: (
-          <ProtectedRouteElement
-            isAuth={false}
-            page={<LoginPage />}
-            isNotForAuthorized={true}
-          />
-        ),
-      },
-      {
-        path: paths.forgotPassword,
-        element: (
-          <ProtectedRouteElement
-            isAuth={false}
-            isNotForAuthorized={true}
-            page={<ForgotPasswordPage />}
-          />
-        ),
-      },
-      {
-        path: paths.resetPassword,
-        element: (
-          <ProtectedRouteElement
-            isAuth={false}
-            isNotForAuthorized={true}
-            page={<ResetPasswordPage />}
-          />
-        ),
-      },
-      {
-        path: paths.profile,
-        loader: loaderIngredientsFull,
-        element: (
-          <ProtectedRouteElement
-            isAuth={true}
-            page={<ProfilePage />}
-            isNotForAuthorized={false}
-          />
-        ),
-        children: [
-          {
-            path: paths.profile,
-            element: <UserContent />,
-          },
-          {
-            path: paths.orderHistory,
-            element: <OrderHistory />,
-          },
-        ],
-      },
+      // {
+      //   path: paths.register,
+      //   element: (
+      //     <ProtectedRouteElement
+      //       isAuth={false}
+      //       page={<RegisterPage />}
+      //       isNotForAuthorized={true}
+      //     />
+      //   ),
+      // },
+      // {
+      //   path: paths.login,
+      //   element: (
+      //     <ProtectedRouteElement
+      //       isAuth={false}
+      //       page={<LoginPage />}
+      //       isNotForAuthorized={true}
+      //     />
+      //   ),
+      // },
+      // {
+      //   path: paths.forgotPassword,
+      //   element: (
+      //     <ProtectedRouteElement
+      //       isAuth={false}
+      //       isNotForAuthorized={true}
+      //       page={<ForgotPasswordPage />}
+      //     />
+      //   ),
+      // },
+      // {
+      //   path: paths.resetPassword,
+      //   element: (
+      //     <ProtectedRouteElement
+      //       isAuth={false}
+      //       isNotForAuthorized={true}
+      //       page={<ResetPasswordPage />}
+      //     />
+      //   ),
+      // },
+      // {
+      //   path: paths.profile,
+      //   loader: loaderIngredientsFull,
+      //   element: (
+      //     <ProtectedRouteElement
+      //       isAuth={true}
+      //       page={<ProfilePage />}
+      //       isNotForAuthorized={false}
+      //     />
+      //   ),
+      //   children: [
+      //     {
+      //       path: paths.profile,
+      //       element: <UserContent />,
+      //     },
+      //     {
+      //       path: paths.orderHistory,
+      //       element: <OrderHistory />,
+      //     },
+      //   ],
+      // },
       {
         loader: loaderIngredientsFull,
         path: '/profile/orders/:id',

@@ -13,12 +13,15 @@ import { chooseItemForModalPageAction } from '../../services/slices/orderSlice';
 export interface IOrderCard {
   date: string | Date;
   number: number | string;
-  ingredientsPictures: string[];
+  ingredientsPictures: {
+    _id: string;
+    image: string;
+  }[];
   name: string;
   price: number;
   status?: string;
   state: {
-    back: Location
+    from: Location
   };
   location: Location;
 }
@@ -33,7 +36,7 @@ export default function OrderCard({
   location,
   status,
 }: IOrderCard) {
-  state = {...state, back: location};
+  state = {...state, from: location};
 
   const dispatch = useAppDispatch();
 
