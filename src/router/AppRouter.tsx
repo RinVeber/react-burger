@@ -112,7 +112,7 @@ export default function AppRouter() {
           <Route
             path={paths.feedOrder}
             element={
-              <Modal header="Детали ингредиента" onClose={handleCloseFeedModal}>
+              <Modal onClose={handleCloseFeedModal}>
                 <FeedOrderInfo />
               </Modal>
             }
@@ -120,10 +120,7 @@ export default function AppRouter() {
           <Route
             path={paths.orderHistoryById}
             element={
-              <Modal
-                header="Детали ингредиента"
-                onClose={handleCloseOrderModal}
-              >
+              <Modal onClose={handleCloseOrderModal}>
                 <FeedOrderInfo />
               </Modal>
             }

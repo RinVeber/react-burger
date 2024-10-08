@@ -57,9 +57,9 @@ function AppHeader() {
           </li>
         </ul>
 
-        <Link to={paths.main} className={styles.logoWrapper} state={{from: location}}>
+        <NavLink to={paths.main} className={styles.logoWrapper}>
           <Logo />
-        </Link>
+        </NavLink>
 
         <ul className={styles.navigationBar}>
           <li className={`${styles.navigationLink} p-5`}>
