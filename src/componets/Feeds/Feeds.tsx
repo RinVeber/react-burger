@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import {ReactNode} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useAppSelector} from '../../services/store';
 import OrderCard from '../OrderCard/OrderCard';
@@ -38,13 +38,13 @@ export default function Feeds({children}: Props) {
       };
     });
 
-    // if (!ingredientsPictures) {
-    //   return null;
-    // }
+    if (!ingredientsPictures) {
+      return null;
+    }
 
-    // if (ingredientsPictures.some((item) => item.image === '')) {
-    //   return null;
-    // }
+    if (ingredientsPictures.some((item) => item.image === '')) {
+      return null;
+    }
     const totalPrice = order?.ingredients
       ?.map(
         (ingredient) =>
@@ -72,9 +72,6 @@ export default function Feeds({children}: Props) {
     );
   });
 
-  //   if (!ordersMap) {
-  //     return <Preloader />;
-  //   }
   return (
     <div className={styles.feeds}>
       <h2 className="text text_type_main-large mt-10 mb-5">Лента заказов</h2>

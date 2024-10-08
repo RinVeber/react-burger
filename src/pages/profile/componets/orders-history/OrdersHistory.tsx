@@ -1,9 +1,7 @@
-import {Outlet, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import styles from './style.module.scss';
 import {useAppSelector} from '../../../../services/store';
 import OrderCard from '../../../../componets/OrderCard/OrderCard';
-import FeedOrderPage from '../../../feed/FeedOrderPage';
-import {ReactNode} from 'react';
 import {Preloader} from '../../../../componets/Preloader/Preloader';
 
 
@@ -61,7 +59,7 @@ export function OrderHistory() {
 
   return (
     <section className={styles.main}>
-      <h2 className={styles.title}>Order History</h2>
+      <h2 className={styles.title}>Лента заказов</h2>
       <ul className={`${styles.orders__list} mt-10`}>{getOrdersMap}</ul>
     </section>
   );
