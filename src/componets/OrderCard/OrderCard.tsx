@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.scss';
 import ingredientsImagesMap from './helpers';
 import {
@@ -7,8 +6,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {getStatusText, ORDER_STATUSES} from '../../utils/data';
 import {Link, Location} from 'react-router-dom';
-import { useAppDispatch } from '../../services/store';
-import { chooseItemForModalPageAction } from '../../services/slices/orderSlice';
+import {useAppDispatch} from '../../services/store';
+import {getOrderDataAction} from '../../services/actions/actions';
 
 export interface IOrderCard {
   date: string | Date;
@@ -21,7 +20,7 @@ export interface IOrderCard {
   price: number;
   status?: string;
   state: {
-    from: Location
+    from: Location;
   };
   location: Location;
 }
@@ -41,7 +40,6 @@ export default function OrderCard({
   const dispatch = useAppDispatch();
 
   const getLinkAdress = () => {
-    dispatch(chooseItemForModalPageAction(number))
     return location.pathname.startsWith('/feed')
       ? `/feed/${number}`
       : `/profile/orders/${number}`;
@@ -54,10 +52,18 @@ export default function OrderCard({
     cancelled: `${styles.card__status} text text_type_main-small mt-2 ${styles.card__status_canselled}`,
   };
 
+  function handleLoadOrderDetails() {
+    dispatch(getOrderDataAction({number: `${number}`}));
+  }
 
   return (
     <li className={`${styles.feeds__card} mr-2`}>
-      <Link to={getLinkAdress()} className={styles.card} state={state}>
+      <Link
+        to={getLinkAdress()}
+        className={styles.card}
+        state={state}
+        onClick={() => handleLoadOrderDetails()}
+      >
         <div className={styles.card__header}>
           <p className={`text text_type_digits-default`}>{number}</p>
           <FormattedDate

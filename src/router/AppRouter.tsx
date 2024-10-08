@@ -111,7 +111,6 @@ export default function AppRouter() {
           />
           <Route
             path={paths.feedOrder}
-  
             element={
               <Modal header="Детали ингредиента" onClose={handleCloseFeedModal}>
                 <FeedOrderInfo />

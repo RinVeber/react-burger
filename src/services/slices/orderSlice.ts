@@ -37,8 +37,8 @@ export const orderSlice = createSlice({
       state.selectedIngredient = action.payload;
     },
     removeItemForModalPageAction: (state) => {
-        state.selectedIngredient = null;
-      },
+      state.selectedIngredient = null;
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<State>) => {
     builder
@@ -52,13 +52,14 @@ export const orderSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getOrderDataAction.rejected, (state, action) => {
-        (state.currentOrderRequest = false),
-          (state.currentOrderFailed = true),
-          (state.currentOrderErrMsg = `Shit happens ${action.payload}`),
-          (state.status = 'error');
+        state.currentOrderRequest = false;
+        state.currentOrderFailed = true;
+        state.currentOrderErrMsg = `Shit happens ${action.payload}`;
+        state.status = 'error';
       });
   },
 });
 
-export const {chooseItemForModalPageAction, removeItemForModalPageAction} = orderSlice.actions;
+export const {chooseItemForModalPageAction, removeItemForModalPageAction} =
+  orderSlice.actions;
 export const orderReducer = orderSlice.reducer;

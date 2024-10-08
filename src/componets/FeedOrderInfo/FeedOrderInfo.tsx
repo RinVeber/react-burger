@@ -1,6 +1,6 @@
 import React from 'react';
-import store, {useAppDispatch, useAppSelector} from '../../services/store';
-import {useLocation, useParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../services/store';
+import {useParams} from 'react-router-dom';
 import {getOrderDataAction} from '../../services/actions/actions';
 import {getStatusText, IDataItem, ORDER_STATUSES} from '../../utils/data';
 import styles from './styles.module.scss';
@@ -29,20 +29,19 @@ export default function FeedOrderInfo() {
   const currentOrderDetails = useAppSelector(
     (store) => store.order.currentOrderDetails,
   );
+  const statusAction = useAppSelector((store) => store.order.status);
 
   React.useEffect(() => {
-    if (!orders.length && orderNum) {
+    if (!orders.length && orderNum && !currentOrderDetails) {
       dispatch(getOrderDataAction({number: orderNum.id!}));
     }
-  }, [orders, dispatch, orderNum]);
+  }, [orders, orderNum]);
 
-  const openedOrderData = orders.length > 0
-      ? orders.find((order) => {
-          return `${order.number}` === `${orderNum.id}`;
-        })
-      : currentOrderDetails;
-  
+  if (statusAction !== 'success') {
+    return <Preloader />;
+  }
 
+  const openedOrderData = currentOrderDetails;
 
   const orderIngredients = openedOrderData?.ingredients.map((ingredient) =>
     items.find((storeItem) => storeItem._id === ingredient),
@@ -59,10 +58,6 @@ export default function FeedOrderInfo() {
     done: `${styles.status} text text_type_main-small mb-15 ${styles.status_done}`,
     cancelled: `${styles.status} text text_type_main-small mb-15 ${styles.status_cancelled}`,
   };
-
-  // if (!orderIngredients) {
-  //   return <Preloader />
-  // }
 
   return openedOrderData ? (
     <div className={styles.container}>

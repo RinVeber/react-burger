@@ -6,11 +6,8 @@ import FeedOrderPage from '../../../feed/FeedOrderPage';
 import {ReactNode} from 'react';
 import {Preloader} from '../../../../componets/Preloader/Preloader';
 
-interface Props {
-  children?: ReactNode;
-}
 
-export function OrderHistory({children}: Props) {
+export function OrderHistory() {
   const location = useLocation();
   const state = location.state;
   const items = useAppSelector((store) => store.data.ingredients);
@@ -66,7 +63,6 @@ export function OrderHistory({children}: Props) {
     <section className={styles.main}>
       <h2 className={styles.title}>Order History</h2>
       <ul className={`${styles.orders__list} mt-10`}>{getOrdersMap}</ul>
-      {children && children}
     </section>
   );
 }

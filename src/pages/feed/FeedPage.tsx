@@ -7,11 +7,8 @@ import FeedsSumm from '../../componets/FeedSumm/FeedSumm';
 import Feeds from '../../componets/Feeds/Feeds';
 import {Preloader} from '../../componets/Preloader/Preloader';
 
-interface Props {
-    children?: ReactNode;
-}
 
-export function FeedPage({children}: Props) {
+export function FeedPage() {
   const dispatch = useAppDispatch();
   const isSuccess = useAppSelector((store) => store.feed.isSuccess);
   React.useEffect(() => {
@@ -31,7 +28,6 @@ export function FeedPage({children}: Props) {
       <section className={styles.feed}>
         <Feeds />
         <FeedsSumm />
-        {children && children}
       </section>
     </main>
   );

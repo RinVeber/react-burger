@@ -37,7 +37,7 @@ export const sendOrderAction = createAsyncThunk<ResponseServerOrder, OrderData>(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'Bearer ' + token as string,
+        authorization: ('Bearer ' + token) as string,
       },
       body: JSON.stringify(data),
     });
@@ -147,12 +147,10 @@ export const getOrderDataAction = createAsyncThunk<
 >(
   'order/getOrderDataAction',
   async ({number}: {number: string}, {dispatch, rejectWithValue}) => {
-    const token = getCookie('accessToken');
     const response = await request(`/orders/${number}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: token as string,
       },
     });
     return response;

@@ -16,34 +16,35 @@ export default function Feeds({children}: Props) {
   const items = useAppSelector((store) => store.data.ingredients);
   const orders = useAppSelector((store) => store.feed.orders);
 
-  if(!orders) {
-    return <Preloader />
+  if (!orders) {
+    return <Preloader />;
   }
 
-  const sortedOrders = [...orders].sort((a, b) => {
-    return (
-      new Date(b.createdAt).getMilliseconds() -
-      new Date(a.createdAt).getMilliseconds()
-    );
-  });
+  const sortedOrders = orders
+    ? [...orders].sort((a, b) => {
+        return (
+          new Date(b.createdAt).getMilliseconds() -
+          new Date(a.createdAt).getMilliseconds()
+        );
+      })
+    : [];
 
   const ordersMap = sortedOrders.map((order) => {
     const ingredientsPictures = order?.ingredients?.map((ingredient) => {
       return {
         image:
-          items.filter((storeItem) => storeItem._id === ingredient)[0]?.image ??
-          '',
+          items.filter((storeItem) => storeItem._id === ingredient)[0]?.image,
         _id: ingredient,
       };
     });
 
-    if (!ingredientsPictures) {
-      return null;
-    }
+    // if (!ingredientsPictures) {
+    //   return null;
+    // }
 
-    if (ingredientsPictures.some((item) => item.image === '')) {
-      return null;
-    }
+    // if (ingredientsPictures.some((item) => item.image === '')) {
+    //   return null;
+    // }
     const totalPrice = order?.ingredients
       ?.map(
         (ingredient) =>
