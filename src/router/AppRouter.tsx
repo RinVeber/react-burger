@@ -5,15 +5,13 @@ import MainLayout, {
   loaderIngredientsFull,
 } from '../componets/main-layout/main-layout';
 import {
-  loaderSendUserInfo,
+
   OnlyAuth,
   OnlyUnAuth,
-  ProtectedRouteElement,
 } from './ProtectedRouteElement';
 import {paths} from './paths';
 import {removeCurrentIngredientAction} from '../services/slices/dataSlice';
 import {Preloader} from '../componets/Preloader/Preloader';
-import AppHeader from '../componets/app-header/app-header';
 import {IngredientPage} from '../pages/ingredient/IngredientPage';
 import Modal from '../componets/ui/modal/modal';
 import IngredientDetails from '../componets/ingredient-details/ingredient-details';
@@ -64,8 +62,6 @@ export default function AppRouter() {
   if (!ingredients) {
     return <Preloader />;
   }
-
-  console.log(from)
   return (
     <React.Fragment>
       <Routes location={from || location}>
