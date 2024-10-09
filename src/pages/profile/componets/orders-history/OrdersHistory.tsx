@@ -59,7 +59,7 @@ export function OrderHistory() {
 
   return (
     <section className={styles.main}>
-      <h2 className={styles.title}>Лента заказов</h2>
+      <h2 className={styles.title}>История заказов</h2>
       <ul className={`${styles.orders__list} mt-10`}>{getOrdersMap}</ul>
     </section>
   );

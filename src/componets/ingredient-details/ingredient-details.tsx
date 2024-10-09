@@ -1,20 +1,27 @@
-import style from "./style.module.scss";
-import React from "react";
-import { useAppSelector } from "../../services/store";
+import style from './style.module.scss';
+import React from 'react';
+import {useAppSelector} from '../../services/store';
+import {useParams} from 'react-router-dom';
 
 export default function IngredientDetails() {
-  const { selectedIngredient } = useAppSelector((store) => store.data);
+  const {selectedIngredient} = useAppSelector((store) => store.data);
+  const items = useAppSelector((store) => store.data.ingredients);
+  const {id} = useParams();
+
+  const selectIngredient = selectedIngredient
+    ? selectedIngredient
+    : items.find((item) => item._id === id);
   return (
     <React.Fragment>
       <div className={style.figure}>
         <img
           className={style.image}
-          src={selectedIngredient?.image}
-          alt={selectedIngredient?.name}
+          src={selectIngredient?.image}
+          alt={selectIngredient?.name}
         />
       </div>
       <p className="text text_type_main-medium mt-4 mb-8">
-        {selectedIngredient?.name}
+        {selectIngredient?.name}
       </p>
       <ul className={`${style.list} mb-5`}>
         <li className={style.item}>
@@ -22,7 +29,7 @@ export default function IngredientDetails() {
             Калории,ккал
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectedIngredient?.calories}
+            {selectIngredient?.calories}
           </p>
         </li>
         <li className={style.item}>
@@ -30,7 +37,7 @@ export default function IngredientDetails() {
             Белки, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectedIngredient?.proteins}
+            {selectIngredient?.proteins}
           </p>
         </li>
         <li className={style.item}>
@@ -38,7 +45,7 @@ export default function IngredientDetails() {
             Жиры, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectedIngredient?.fat}
+            {selectIngredient?.fat}
           </p>
         </li>
         <li className={style.item}>
@@ -46,7 +53,7 @@ export default function IngredientDetails() {
             Углеводы, г
           </p>
           <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectedIngredient?.carbohydrates}
+            {selectIngredient?.carbohydrates}
           </p>
         </li>
       </ul>

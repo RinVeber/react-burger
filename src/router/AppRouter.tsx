@@ -64,6 +64,8 @@ export default function AppRouter() {
   if (!ingredients) {
     return <Preloader />;
   }
+
+  console.log(from)
   return (
     <React.Fragment>
       <Routes location={from || location}>
