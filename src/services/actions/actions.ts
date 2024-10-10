@@ -1,11 +1,10 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadDataFailAction} from '../slices/dataSlice';
-import {loadOrderFailAction} from '../slices/constructorSlice';
 import {request} from '../../utils/helper-function/checkResponse';
 import {getCookie, setCookie} from '../../utils/helper-function/cockie';
 import {fetchWithRefresh} from '../../utils/helper-function/fetchWithRefresh';
 import {IUserInfo} from '../entities/authApi';
 import {IDataItem} from '../../utils/data';
+import {IFetchOrderResponse} from '../slices/wsOrderSlice';
 
 export interface ServerResponse {
   success: boolean;
@@ -33,10 +32,12 @@ interface ResponseServerMain extends ServerResponse {
 export const sendOrderAction = createAsyncThunk<ResponseServerOrder, OrderData>(
   'constructor/sendOrderAction',
   async (data: OrderData, {dispatch}) => {
+    const token = getCookie('accessToken')!.split(' ')[1];
     const response = await request(`/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        authorization: ('Bearer ' + token) as string,
       },
       body: JSON.stringify(data),
     });
@@ -137,6 +138,21 @@ export const sendUserInfoRequestAction = createAsyncThunk<
       authorization: getCookie('accessToken'),
     } as HeadersInit,
   });
-
   return response;
 });
+
+export const getOrderDataAction = createAsyncThunk<
+  IFetchOrderResponse,
+  {number: string}
+>(
+  'order/getOrderDataAction',
+  async ({number}: {number: string}, {dispatch, rejectWithValue}) => {
+    const response = await request(`/orders/${number}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response;
+  },
+);

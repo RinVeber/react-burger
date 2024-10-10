@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, useLocation } from "react-router-dom";
-import { router } from "./router/router";
+import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./utils/error-boundary/error-boundary";
 import { Provider } from "react-redux";
 import store from "./services/store";
+import AppRouter from "./router/AppRouter";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -15,7 +15,9 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
-        <RouterProvider router={router}  />
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,

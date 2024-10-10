@@ -5,9 +5,12 @@ import React from 'react';
 import {paths} from './paths';
 
 interface Props {
-  isAuth: boolean;
   page: JSX.Element;
-  isNotForAuthorized: boolean;
+  isNotForAuthorized?: boolean;
+}
+
+interface IOnlyUnAuth {
+  page: JSX.Element;
 }
 
 export const loaderSendUserInfo = async () => {
@@ -15,38 +18,37 @@ export const loaderSendUserInfo = async () => {
 };
 
 export function ProtectedRouteElement({
-  isAuth,
   page,
-  isNotForAuthorized,
+  isNotForAuthorized = false,
 }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const userInfoSuccess = useAppSelector((store) => store.auth.userInfoSuccess);
-  const isUserInfoLoading = useAppSelector(
-    (store) => store.auth.isUserInfoLoading,
-  );
-
-  const from = location.state?.from || '/';
   React.useEffect(() => {
     if (!userInfoSuccess) {
       dispatch(sendUserInfoRequestAction());
     }
   }, [userInfoSuccess]);
 
-  if (userInfoSuccess && isNotForAuthorized) {
+  const from = location.state?.from || '/';
+
+
+  if (isNotForAuthorized && userInfoSuccess) {
     return <Navigate to={from} />;
   }
 
-  if (isAuth && userInfoSuccess === false) {
+  if (!isNotForAuthorized && userInfoSuccess == false) {
     return (
-      <Navigate to={paths.login} replace={true} state={{from: location}} />
+      <Navigate to={paths.login} />
     );
-  }
-
-  if (isUserInfoLoading) {
-    return <div>Loading...</div>;
   }
 
   return page;
 }
+
+
+export const OnlyAuth = ProtectedRouteElement;
+export const OnlyUnAuth = ({ page }: IOnlyUnAuth): JSX.Element => (
+  <ProtectedRouteElement isNotForAuthorized={true} page={page} />
+);

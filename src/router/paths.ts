@@ -6,5 +6,8 @@ export const paths = {
   resetPassword: "/reset-password",
   profile: "/profile",
   orderHistory: "/profile/orders",
+  orderHistoryById: "profile/orders/:id",
   ingredients: "/ingredients/:id",
+  feed: '/feed',
+  feedOrder: '/feed/:id'
 };

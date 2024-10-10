@@ -1,6 +1,33 @@
 import PropTypes from "prop-types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
+export const WS_LINK = "wss://norma.nomoreparties.space/orders";
+export const WS_DEBUG = false;
+export const WS_DEBUG_MIDDLE = false;
+
+export const ORDER_STATUSES = {
+  created: "created",
+  pending: "pending",
+  done: "done",
+  canselled: "canselled",
+};
+
+
+
+export function getStatusText(status?: string | null) {
+  switch (status) {
+    case ORDER_STATUSES.created:
+      return "Создан";
+    case ORDER_STATUSES.pending:
+      return "Готовится";
+    case ORDER_STATUSES.done:
+      return "Выполнен";
+    case ORDER_STATUSES.canselled:
+      return "Отменён";
+    default:
+      return "";
+  }
+}
 
 export interface IDataItem {
   _id: string;

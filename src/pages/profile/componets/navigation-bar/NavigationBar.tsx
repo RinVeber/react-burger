@@ -41,7 +41,7 @@ export function NavigationBar() {
           <li className={`${styles.links__item} text text_type_main-medium`}>
             <NavLink
               className={setLinkStyle("/profile/orders")}
-              to={"/profile/orders"}
+              to={`${paths.orderHistory}`}
             >
               История заказов
             </NavLink>
