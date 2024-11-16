@@ -2,7 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://rinveber.github.io/mesto-react-main-test/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.5",
