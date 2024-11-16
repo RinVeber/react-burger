@@ -28,9 +28,6 @@ root.render(
             <AppRouter />
           </HashRouter>
         )}
-        {/* <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter> */}
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
