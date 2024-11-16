@@ -3,7 +3,7 @@ import {IDataItem} from '../../utils/data';
 import {TabStatus} from '../../componets/burger-ingredients/burger-ingredients';
 import {getAllIngredientsAction} from '../actions/actions';
 
-interface State {
+export interface State {
   ingredients: IDataItem[];
   success: boolean;
   errorMessage: unknown;
@@ -13,7 +13,7 @@ interface State {
   selectedIngredient: IDataItem | null;
 }
 
-const dataState: State = {
+export const dataState: State = {
   ingredients: [],
   isModal: false,
   success: false,
@@ -72,4 +72,6 @@ export const {
   removeCurrentIngredientAction,
   changeIsModalAction
 } = dataSlice.actions;
+
+
 export const dataReducer = dataSlice.reducer;

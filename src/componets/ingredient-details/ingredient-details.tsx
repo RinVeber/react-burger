@@ -2,6 +2,7 @@ import style from './style.module.scss';
 import React from 'react';
 import {useAppSelector} from '../../services/store';
 import {useParams} from 'react-router-dom';
+import {IDataItem, INGRSTATS} from '../../utils/data';
 
 export default function IngredientDetails() {
   const {selectedIngredient} = useAppSelector((store) => store.data);
@@ -24,7 +25,20 @@ export default function IngredientDetails() {
         {selectIngredient?.name}
       </p>
       <ul className={`${style.list} mb-5`}>
-        <li className={style.item}>
+        {Object.entries(INGRSTATS).map(([key, name]) => {
+          return (
+            <li key={key} className={style.item}>
+              <div className="text text_type_main-default text_color_inactive">
+                {name}
+              </div>
+
+              <div className="text text_type_digits-default text_color_inactive mt-2">
+                {selectIngredient?.[key as keyof IDataItem]}
+              </div>
+            </li>
+          );
+        })}
+        {/* <li className={style.item}>
           <p className="text text_type_main-default text_color_inactive">
             Калории,ккал
           </p>
@@ -55,7 +69,7 @@ export default function IngredientDetails() {
           <p className="text text_type_digits-default text_color_inactive mt-2">
             {selectIngredient?.carbohydrates}
           </p>
-        </li>
+        </li> */}
       </ul>
     </React.Fragment>
   );

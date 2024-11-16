@@ -9,7 +9,7 @@ export default function OrderDetails() {
   );
   return (
     <React.Fragment>
-      <p className={`${style.number} text text_type_digits-large mt-4`}>
+      <p className={`${style.number} text text_type_digits-large mt-4`} data-testid="order-number">
         {orderNumber}
       </p>
       <p className={`text text_type_main-medium mt-8`}>идентификатор заказа</p>

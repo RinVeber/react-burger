@@ -29,9 +29,11 @@ function Modal({ children, header, onClose }: PropsModal) {
 
   return ReactDOM.createPortal(
     <React.Fragment>
-      <div className={`${style.modal} p-10`}>
+      <div className={`${style.modal} p-10`} data-testid='modal'>
         <ModalHeader close={onClose}>{header}</ModalHeader>
+        <div data-testid='modal-body' >  
         {children}
+        </div>
       </div>
       <ModalOverlay close={onClose} />
     </React.Fragment>,

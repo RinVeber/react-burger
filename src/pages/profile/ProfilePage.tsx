@@ -24,7 +24,7 @@ export function ProfilePage({children}: Props) {
 
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} data-testid="page-profile">
       <NavigationBar />
       <div className={styles.content}>
         <Outlet />

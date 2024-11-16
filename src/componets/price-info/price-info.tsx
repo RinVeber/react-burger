@@ -65,6 +65,7 @@ export default function PriceInfo() {
           <CurrencyIcon type="primary" />
         </div>
         <Button
+        data-testid="button-order"
           type="primary"
           size="large"
           htmlType="button"

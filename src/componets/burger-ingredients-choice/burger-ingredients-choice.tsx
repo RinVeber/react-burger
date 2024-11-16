@@ -47,7 +47,7 @@ function BurgerIngredientsChoice() {
   );
 
   return (
-    <ul className={style.primaryList} ref={drop}>
+    <ul className={style.primaryList} ref={drop} >
       <BurgerItem
         item={selectedBun ? selectedBun : DefaultBun}
         position="top"

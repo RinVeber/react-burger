@@ -55,7 +55,7 @@ export default function BurgerIngredients() {
 
   return (
     <React.Fragment>
-      <div className={style.ingredientsList}>
+      <div className={style.ingredientsList} data-testid="burger-ingredients" >
         <h2 className="text text_type_main-large mt-10 mb-5">
           Соберите бургер
         </h2>

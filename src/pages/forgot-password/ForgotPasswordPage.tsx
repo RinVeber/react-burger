@@ -44,7 +44,7 @@ export function ForgotPasswordPage() {
           isIcon={false}
           // errorText={"Введена не правильная почта"}
         />
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium" data-testid='button-submit'>
           Восстановить
         </Button>
       </form>

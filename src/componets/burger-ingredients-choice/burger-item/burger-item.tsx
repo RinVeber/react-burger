@@ -65,6 +65,7 @@ export default function BurgerItem({
 
   return (
     <li
+    data-testid="burger-constructor-list"
       className={style.item}
       {...(item.type !== TabStatus.buns && {ref: refElement})}
       style={isDrag ? {opacity: 0.5} : {opacity: 1}}

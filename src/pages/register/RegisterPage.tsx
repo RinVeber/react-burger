@@ -31,9 +31,10 @@ export default function RegisterPage() {
 
   return (
     <main className={styles.main}>
-      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form} data-testid="auth-form-register">
         <h1 className="text text_type_main-medium">Регистрация</h1>
         <Input
+        data-testid="auth-input-name"
           type={"text"}
           placeholder={"Имя"}
           onChange={(e) => setNameValue(e.target.value)}
@@ -42,6 +43,7 @@ export default function RegisterPage() {
           errorText={"Введите корректное имя пользователя"}
         />
         <EmailInput
+          data-testid="auth-input-email"
           onChange={(e) => setEmailValue(e.target.value)}
           value={emailValue}
           name={"email"}
@@ -49,12 +51,13 @@ export default function RegisterPage() {
           // errorText={"Проверьте правильность почты"}
         />
         <PasswordInput
+          data-testid="auth-input-password"
           onChange={(e) => setPasswordValue(e.target.value)}
           value={passwordValue}
           name={"password"}
           // errorText={"Введите другой пароль"}
         />
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium" data-testid='button-submit-register'>
           Зарегистрироваться
         </Button>
       </form>
