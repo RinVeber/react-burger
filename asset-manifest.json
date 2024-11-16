@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/mesto-react-main-test/static/css/main.2f8e7fe5.css",
-    "main.js": "/mesto-react-main-test/static/js/main.0678640b.js",
-    "static/js/453.8915ba24.chunk.js": "/mesto-react-main-test/static/js/453.8915ba24.chunk.js",
-    "static/media/done.gif": "/mesto-react-main-test/static/media/done.cc5a59a7a28231cabd53.gif",
-    "static/media/JetBrainsMono-Bold.woff": "/mesto-react-main-test/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
-    "static/media/JetBrainsMono-Regular.woff": "/mesto-react-main-test/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
-    "static/media/JetBrainsMono-Bold.woff2": "/mesto-react-main-test/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
-    "static/media/JetBrainsMono-Regular.woff2": "/mesto-react-main-test/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
-    "static/media/bun.png": "/mesto-react-main-test/static/media/bun.c59a4dbe36944292978b.png",
-    "static/media/iceland.woff": "/mesto-react-main-test/static/media/iceland.77ad7fc2baffd9305538.woff",
-    "static/media/iceland.woff2": "/mesto-react-main-test/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
-    "index.html": "/mesto-react-main-test/index.html",
-    "main.2f8e7fe5.css.map": "/mesto-react-main-test/static/css/main.2f8e7fe5.css.map",
-    "main.0678640b.js.map": "/mesto-react-main-test/static/js/main.0678640b.js.map",
-    "453.8915ba24.chunk.js.map": "/mesto-react-main-test/static/js/453.8915ba24.chunk.js.map"
+    "main.css": "/react-burger/static/css/main.eeb974af.css",
+    "main.js": "/react-burger/static/js/main.8e78f6ff.js",
+    "static/js/453.8915ba24.chunk.js": "/react-burger/static/js/453.8915ba24.chunk.js",
+    "static/media/done.gif": "/react-burger/static/media/done.cc5a59a7a28231cabd53.gif",
+    "static/media/JetBrainsMono-Bold.woff": "/react-burger/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
+    "static/media/JetBrainsMono-Regular.woff": "/react-burger/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
+    "static/media/JetBrainsMono-Bold.woff2": "/react-burger/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
+    "static/media/JetBrainsMono-Regular.woff2": "/react-burger/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
+    "static/media/bun.png": "/react-burger/static/media/bun.c59a4dbe36944292978b.png",
+    "static/media/iceland.woff": "/react-burger/static/media/iceland.77ad7fc2baffd9305538.woff",
+    "static/media/iceland.woff2": "/react-burger/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
+    "index.html": "/react-burger/index.html",
+    "main.eeb974af.css.map": "/react-burger/static/css/main.eeb974af.css.map",
+    "main.8e78f6ff.js.map": "/react-burger/static/js/main.8e78f6ff.js.map",
+    "453.8915ba24.chunk.js.map": "/react-burger/static/js/453.8915ba24.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2f8e7fe5.css",
-    "static/js/main.0678640b.js"
+    "static/css/main.eeb974af.css",
+    "static/js/main.8e78f6ff.js"
   ]
 }
