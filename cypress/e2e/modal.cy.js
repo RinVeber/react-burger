@@ -19,7 +19,7 @@ describe('MODAL', function () {
     cy.get(selector.modal).should('exist');
 
     cy.get(selector.modalHeader).contains('Детали ингредиента');
-    cy.get(selector.modalBody).should('not.be.empty');
+    cy.get(selector.modalIngredient).should('not.be.empty');
 
     cy.wait(1000);
   });
@@ -35,10 +35,11 @@ describe('MODAL', function () {
       'eq',
       "/ingredients/:id".replace(':id', bun._id),
     );
-    cy.get(selector.modalBody)
+    cy.get(selector.modalIngredient)
       .find('img')
       .should('have.attr', 'src', bun.image);
-    cy.get(selector.modalBody).contains(bun.name);
+      cy.wait(1000);
+    cy.get(selector.modalIngredientName).contains(bun.name);
 
     Object.entries({
         calories: 'Калории, ккал',
@@ -59,7 +60,7 @@ describe('MODAL', function () {
     cy.get(selector.modal).should('exist');
 
     cy.get(selector.modalHeader).contains('Детали ингредиента');
-    cy.get(selector.modalBody).should('not.be.empty');
+    cy.get(selector.modalIngredient).should('not.be.empty');
     cy.wait(2000);
 
     // closing

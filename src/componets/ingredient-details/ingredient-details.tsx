@@ -14,14 +14,14 @@ export default function IngredientDetails() {
     : items.find((item) => item._id === id);
   return (
     <React.Fragment>
-      <div className={style.figure}>
+      <div className={style.figure} data-testid='modal-ingredient-details'>
         <img
           className={style.image}
           src={selectIngredient?.image}
           alt={selectIngredient?.name}
         />
       </div>
-      <p className="text text_type_main-medium mt-4 mb-8">
+      <p className="text text_type_main-medium mt-4 mb-8"  data-testid='modal-ingredient-details-name'>
         {selectIngredient?.name}
       </p>
       <ul className={`${style.list} mb-5`}>
@@ -38,38 +38,6 @@ export default function IngredientDetails() {
             </li>
           );
         })}
-        {/* <li className={style.item}>
-          <p className="text text_type_main-default text_color_inactive">
-            Калории,ккал
-          </p>
-          <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectIngredient?.calories}
-          </p>
-        </li>
-        <li className={style.item}>
-          <p className="text text_type_main-default text_color_inactive">
-            Белки, г
-          </p>
-          <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectIngredient?.proteins}
-          </p>
-        </li>
-        <li className={style.item}>
-          <p className="text text_type_main-default text_color_inactive">
-            Жиры, г
-          </p>
-          <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectIngredient?.fat}
-          </p>
-        </li>
-        <li className={style.item}>
-          <p className="text text_type_main-default text_color_inactive">
-            Углеводы, г
-          </p>
-          <p className="text text_type_digits-default text_color_inactive mt-2">
-            {selectIngredient?.carbohydrates}
-          </p>
-        </li> */}
       </ul>
     </React.Fragment>
   );

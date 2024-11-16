@@ -31,7 +31,7 @@ function Modal({ children, header, onClose }: PropsModal) {
     <React.Fragment>
       <div className={`${style.modal} p-10`} data-testid='modal'>
         <ModalHeader close={onClose}>{header}</ModalHeader>
-        <div data-testid='modal-body' >  
+     <div data-testid='modal-body' className={style.modalBody}>
         {children}
         </div>
       </div>

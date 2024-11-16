@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { TabStatus } from "../componets/burger-ingredients/burger-ingredients";
 import { State } from "../services/slices/dataSlice";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
@@ -14,29 +13,7 @@ export const ORDER_STATUSES = {
   canselled: "canselled",
 };
 
-export enum PAGES {
-  home = '/react-burger',
-  constructor = '/',
-  ingredientId = '/ingredients/:id',
-  feed = '/feed',
-  feedOrder = '/feed/:number',
-  login = '/login',
-  register = '/register',
-  forgotPassword = '/forgot-password',
-  resetPassword = '/reset-password',
-  profile = '/profile',
-  profileOrders = '/profile/orders',
-  profileOrder = '/profile/orders/:number',
-}
-
-
-export enum TYPES {
-  bun = 'Булки',
-  sauce = 'Соусы',
-  main = 'Начинки',
-}
-
-export const  INGRSTATS = {
+export const INGRSTATS = {
   calories: 'Калории, ккал',
   proteins: 'Белки, г',
   fat: 'Жиры, г',
