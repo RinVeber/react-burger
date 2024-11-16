@@ -32,7 +32,6 @@ export const authApi = createApi({
         body: JSON.stringify({ email, password }),
       }),
       transformResponse: (response: RegisterResponse) => {
-        console.log(response)
         if (response.success) {
           setCookie("accessToken", response.accessToken);
           setCookie("refreshToken", response.refreshToken);
