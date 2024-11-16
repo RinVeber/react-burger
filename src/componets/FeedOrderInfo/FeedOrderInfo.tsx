@@ -60,7 +60,7 @@ export default function FeedOrderInfo() {
   };
 
   return openedOrderData ? (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid='modal-feed-order'>
       <p className={`${styles.ordernum} text text_type_digits-default mb-10`}>
         {openedOrderData.number}
       </p>

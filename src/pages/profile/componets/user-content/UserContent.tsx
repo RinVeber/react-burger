@@ -83,8 +83,9 @@ export function UserContent() {
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+    <form onSubmit={onSubmit} className={styles.form} data-testid="auth-form-profile">
       <Input
+       data-testid="auth-input-name"
         type={"text"}
         placeholder={"Ваше имя"}
         onChange={(e) => handleChange(e)}
@@ -98,6 +99,7 @@ export function UserContent() {
         disabled={nameFieldState}
       />
       <Input
+             data-testid="auth-input-email"
         type={'email'}
         onChange={(e) => handleChange(e)}
         value={values.email}
@@ -111,6 +113,7 @@ export function UserContent() {
       
       />
       <Input
+        data-testid="auth-input-password"
         type="password"
         onChange={(e) => handleChange(e)}
         value={values.password || ''}
@@ -132,7 +135,7 @@ export function UserContent() {
           >
             Отмена
           </Button>
-          <Button htmlType="submit" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium" data-testid='button-submit'>
             Сохранить
           </Button>
         </div>

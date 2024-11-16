@@ -29,7 +29,7 @@ export default function MainLayout({children}: Props) {
   );
 
   return (
-    <main className={style.main}>
+    <main className={style.main} data-testid="page-constructor">
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
         <BurgerConstructor />

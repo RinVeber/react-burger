@@ -56,7 +56,7 @@ export function ResetPasswordPage() {
         {resetPassMessage && (
           <span className={styles.errorText}>{resetPassMessage}</span>
         )}
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button data-testid='button-submit' htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
       </form>

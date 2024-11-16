@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { State } from "../services/slices/dataSlice";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 export const WS_LINK = "wss://norma.nomoreparties.space/orders";
@@ -12,6 +13,30 @@ export const ORDER_STATUSES = {
   canselled: "canselled",
 };
 
+export const INGRSTATS = {
+  calories: 'Калории, ккал',
+  proteins: 'Белки, г',
+  fat: 'Жиры, г',
+  carbohydrates: 'Углеводы, г',
+}
+
+
+export const RequestDefaults: State = {
+  status: 'init',
+  isModal: false,
+  success: false,
+  errorMessage: null,
+  ingredientsCurrentTab: "bun",
+  selectedIngredient: null,
+  ingredients: [],
+}
+
+export const DataDefault = {
+  data: {
+    ...RequestDefaults,
+    ingredients: [],
+  },
+}
 
 
 export function getStatusText(status?: string | null) {

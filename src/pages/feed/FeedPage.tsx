@@ -24,7 +24,7 @@ export function FeedPage() {
   }
 
   return (
-    <main>
+    <main data-testid="page-feed">
       <section className={styles.feed}>
         <Feeds />
         <FeedsSumm />

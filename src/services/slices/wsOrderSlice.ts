@@ -75,7 +75,7 @@ interface State {
   status: 'init' | 'loading' | 'success' | 'error' | 'closed';
 }
 
-const wsOrderState: State = {
+export const defaultWsOrderState: State = {
   orders: [],
   total: 0,
   code: 0,
@@ -88,7 +88,7 @@ const wsOrderState: State = {
 
 export const wsOrderSlice = createSlice({
   name: 'wsOrder',
-  initialState: wsOrderState,
+  initialState: defaultWsOrderState,
   reducers: {},
   selectors: {
     takeIsSuccess: (state) => state.isSuccess,

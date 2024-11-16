@@ -9,7 +9,7 @@ interface Props {
 
 export default function ModalHeader({ close, children }: Props) {
   return (
-    <div className={style.header}>
+    <div className={style.header} data-testid='modal-header'>
       <p className={`${style.title} text text_type_main-large`}>{children}</p>
       <div className={`${style.closeBox}`}>
         <CloseIcon type="primary" onClick={close} />

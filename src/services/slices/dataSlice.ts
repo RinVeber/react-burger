@@ -3,22 +3,22 @@ import {IDataItem} from '../../utils/data';
 import {TabStatus} from '../../componets/burger-ingredients/burger-ingredients';
 import {getAllIngredientsAction} from '../actions/actions';
 
-interface State {
+export interface State {
   ingredients: IDataItem[];
   success: boolean;
   errorMessage: unknown;
-  ingredientsCurrentTab: TabStatus;
+  ingredientsCurrentTab: string;
   isModal: boolean;
   status: 'init' | 'loading' | 'success' | 'error';
   selectedIngredient: IDataItem | null;
 }
 
-const dataState: State = {
+export const dataState: State = {
   ingredients: [],
   isModal: false,
   success: false,
   errorMessage: null,
-  ingredientsCurrentTab: TabStatus.buns,
+  ingredientsCurrentTab: "bun",
   selectedIngredient: null,
   status: 'init',
 };
@@ -72,4 +72,6 @@ export const {
   removeCurrentIngredientAction,
   changeIsModalAction
 } = dataSlice.actions;
+
+
 export const dataReducer = dataSlice.reducer;

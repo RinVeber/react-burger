@@ -25,7 +25,7 @@ interface State {
   status: "init" | "loading" | "success" | "error";
 }
 
-const constructorState: State = {
+export const defaultConstructorState: State = {
   selectedBun: null,
   selectedIngredients: [],
   orderNumber: null,
@@ -37,7 +37,7 @@ const constructorState: State = {
 
 export const constructorSlice = createSlice({
   name: "constructor",
-  initialState: constructorState,
+  initialState: defaultConstructorState,
   reducers: {
     loadOrderFailAction: (state, action) => {
       state.errorMessage = action.payload;

@@ -25,9 +25,20 @@ const location = useLocation()
     email: "",
   });
 
+  const [disabled, setDisabled] = React.useState(true)
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loginUser, _] = useLoginMutation();
+
+  React.useEffect(() => {
+    if(values.password && values.email) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+
+  }, [values])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,10 +71,11 @@ const location = useLocation()
   }, [isLoginSuccess]);
 
   return (
-    <main className={styles.main}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+    <main className={styles.main} data-testid="page-login">
+      <form onSubmit={handleSubmit} className={styles.form}  data-testid="auth-form-login">
         <h1 className="text text_type_main-medium">Вход</h1>
         <EmailInput
+        data-testid="auth-input-email"
           onChange={(e) => handleChange(e)}
           value={values.email}
           name={"email"}
@@ -71,6 +83,7 @@ const location = useLocation()
           // errorText={"Введена не корректная почта."}
         />
         <PasswordInput
+        data-testid="auth-input-password"
           onChange={(e) => handleChange(e)}
           value={values.password}
           name={"password"}
@@ -80,7 +93,7 @@ const location = useLocation()
             Ошибка входа. Проверьте логин или пароль.
           </p>
         )}
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium" data-testid='button-submit-login' disabled={!disabled}>
           Войти
         </Button>
       </form>
