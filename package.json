@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": " https://rinveber.github.io/react-burger",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.5",
