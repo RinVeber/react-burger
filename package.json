@@ -1,6 +1,7 @@
 {
   "name": "react-burger",
   "version": "0.1.0",
+  "homepage": " https://rinveber.github.io/react-burger",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
@@ -25,8 +26,9 @@
     "eject": "react-scripts eject",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "cypress:open": "./node_modules/.bin/cypress open",
-    "cypress": "start-server-and-test start http://localhost:3000 cy:open"
+    "cypress": "start-server-and-test start http://localhost:3000 cy:open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +66,7 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-react": "^7.36.1",
     "fetch-mock": "^12.2.0",
+    "gh-pages": "^6.2.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.3.3",
