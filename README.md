@@ -1,5 +1,5 @@
 # GITHUB PAGES
-https://rinveber.github.io/react-burger/
+https://rinveber.github.io/react-burger
 
 # Getting Started with Create React App
 
