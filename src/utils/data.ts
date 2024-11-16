@@ -49,7 +49,7 @@ export const RequestDefaults: State = {
   isModal: false,
   success: false,
   errorMessage: null,
-  ingredientsCurrentTab: TabStatus.buns,
+  ingredientsCurrentTab: "bun",
   selectedIngredient: null,
   ingredients: [],
 }

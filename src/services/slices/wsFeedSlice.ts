@@ -20,7 +20,7 @@ interface State {
   status: 'init' | 'loading' | 'success' | 'error' | 'closed';
 }
 
-const wsFeedState: State = {
+export const defaultWsFeedState: State = {
   orders: [],
   totalToday: 0,
   isSuccess: false,
@@ -32,7 +32,7 @@ const wsFeedState: State = {
 
 export const wsFeedSlice = createSlice({
   name: 'wsFeed',
-  initialState: wsFeedState,
+  initialState: defaultWsFeedState,
   reducers: {
     wsFeedCloseAction: (state, action) => {
       state.orders = [];

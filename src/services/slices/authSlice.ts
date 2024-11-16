@@ -36,7 +36,7 @@ interface State {
   status: 'init' | 'loading' | 'success' | 'error';
 }
 
-const constructorState: State = {
+export const defaultAuthState: State = {
   userInfoSuccess: null,
   changeUserInfoSuccess: false,
   accessToken: getCookie('accessToken') || null,
@@ -59,7 +59,7 @@ const constructorState: State = {
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: constructorState,
+  initialState: defaultAuthState,
   reducers: {
     setUserAction: (state, action: PayloadAction<RegisterResponse>) => {
       const {user, accessToken, refreshToken, success} = action.payload;

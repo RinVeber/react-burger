@@ -7,7 +7,7 @@ export interface State {
   ingredients: IDataItem[];
   success: boolean;
   errorMessage: unknown;
-  ingredientsCurrentTab: TabStatus;
+  ingredientsCurrentTab: string;
   isModal: boolean;
   status: 'init' | 'loading' | 'success' | 'error';
   selectedIngredient: IDataItem | null;
@@ -18,7 +18,7 @@ export const dataState: State = {
   isModal: false,
   success: false,
   errorMessage: null,
-  ingredientsCurrentTab: TabStatus.buns,
+  ingredientsCurrentTab: "bun",
   selectedIngredient: null,
   status: 'init',
 };

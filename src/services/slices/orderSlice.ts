@@ -16,7 +16,7 @@ interface State {
   status: 'init' | 'loading' | 'success' | 'error';
 }
 
-const orderState: State = {
+export const orderStateDefault: State = {
   orderDetails: null,
   orderRequest: false,
   orderFailed: false,
@@ -31,7 +31,7 @@ const orderState: State = {
 
 export const orderSlice = createSlice({
   name: 'order',
-  initialState: orderState,
+  initialState: orderStateDefault,
   reducers: {
     chooseItemForModalPageAction: (state, action) => {
       state.selectedIngredient = action.payload;
